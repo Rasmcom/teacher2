@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملف شواهد الأداء الوظيفي للمعلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- هنا تم وضع الـ CSS كاملاً لتسهيل النسخ -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: #f5f5f5; color: #333; padding-right: 70px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        header { background-color: #333; padding: 15px 0; position: relative; width: 100%; }
+        .header-content { display: flex; flex-direction: column; align-items: center; }
+        .header-top { display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 10px; }
+        .logo-container { display: flex; align-items: center; margin: 0 auto; }
+        .logo { width: 60px; height: auto; margin-left: 15px; }
+        .site-title { color: white; font-size: 20px; font-weight: 700; }
+        .teacher-name { color: #4CAF50; font-size: 20px; font-weight: 700; margin-right: 10px; }
+        .header-info { color: white; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; }
+        .header-info-row { display: flex; justify-content: center; gap: 20px; }
+        .header-info p { margin: 0; }
+        .main-layout { display: flex; min-height: calc(100vh - 200px); }
+        .sidebar { width: 70px; background-color: #333; position: fixed; top: 0; right: 0; height: 100%; z-index: 100; padding-top: 180px; }
+        .nav-list { list-style: none; padding: 0; }
+        .nav-item { position: relative; margin-bottom: 5px; }
+        .nav-link { display: flex; align-items: center; justify-content: center; padding: 15px 0; color: white; text-decoration: none; transition: all 0.3s ease; }
+        .nav-link:hover { background-color: rgba(76, 175, 80, 0.2); }
+        .nav-link.active { background-color: #4CAF50; }
+        .nav-icon { font-size: 20px; text-align: center; }
+        .nav-text { position: absolute; right: 70px; top: 0; background-color: #333; padding: 8px 15px; border-radius: 8px 0 0 8px; white-space: nowrap; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: -2px 0 10px rgba(0,0,0,0.2); height: 100%; display: flex; align-items: center; margin: 0; font-weight: bold; }
+        .nav-link:hover .nav-text { opacity: 1; visibility: visible; right: 50px; background: linear-gradient(to right, #2196F3, #4CAF50); color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .content-area { flex: 1; padding: 20px; width: 100%; }
+        .tab-content { display: none; padding: 20px; background-color: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; min-height: 400px; }
+        .tab-content.active { display: block; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+        .btn { background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+        .btn:hover { background-color: #0b7dda; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; margin: 10% auto; padding: 20px; border-radius: 5px; width: 80%; max-width: 500px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+        .close-modal { position: absolute; top: 10px; left: 10px; font-size: 24px; cursor: pointer; color: #777; }
+        footer { background-color: #333; color: white; padding: 20px 0; text-align: center; margin-top: 30px; }
+        .footer-content { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .footer-logo { width: 40px; height: auto; transition: transform 0.3s ease; }
+        .footer-logo:hover { transform: scale(1.1); }
+        .leader-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .leader-card:hover .leader-image { transform: scale(1.1); }
+        .delete-btn { background-color: #ff5252; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .performance-result { margin-top: 30px; padding: 30px; background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); border-radius: 8px; text-align: center; box-shadow: 0 3px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+        .performance-result::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #2196F3, #4CAF50); }
+        .result-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #333; }
+        .result-score { font-size: 48px; font-weight: 700; color: #7f8c8d; margin-bottom: 10px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); transition: color 0.5s ease; }
+        .result-rating { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #7f8c8d; transition: color 0.5s ease; }
+        .result-details { margin-top: 20px; text-align: right; max-width: 600px; margin-left: auto; margin-right: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .result-details p { margin-bottom: 8px; display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #e0e0e0; }
+        .result-details p:last-child { border-bottom: none; }
+        .upload-item { width: 100px; height: 100px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; position: relative; cursor: pointer; flex-shrink: 0;}
+        .upload-item img, .upload-item iframe { width: 100%; height: 100%; object-fit: cover; }
+        .upload-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: #f5f5f5; color: #777; font-size: 30px; }
+        .upload-file-icon { font-size: 40px; color: #2196F3; display: flex; align-items: center; justify-content: center; height: 100%; }
+        .image-preview-modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+        .image-preview-content { display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; }
+        .preview-image { max-width: 90%; max-height: 90%; }
+        .close-preview { position: absolute; top: 20px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
+        .certificate-item { width: 150px; height: 150px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; position: relative; cursor: pointer; }
+        .certificate-item img { width: 100%; height: 100%; object-fit: cover; }
+        .certificate-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: #f5f5f5; color: #777; font-size: 40px; }
+        .certificate-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-top">
+                    <div class="logo-container">
+                        <img src="https://salogos.org/wp-content/uploads/2021/11/UntiTtled-1-1300x988.png" alt="شعار وزارة التعليم" class="logo">
+                        <h1 class="site-title">ملف شواهد الأداء الوظيفي للمعلم <span class="teacher-name" id="headerTeacherName">-</span></h1>
+                    </div>
+                </div>
+                <div class="header-info" id="headerInfo">
+                    <p id="educationDept">الإدارة التعليمية: -</p>
+                    <div class="header-info-row">
+                        <p id="schoolName">المدرسة: -</p>
+                        <p id="academicYear">العام الدراسي: -</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#" class="nav-link active" data-tab="home"><i class="fas fa-home nav-icon"></i><span class="nav-text">الرئيسية</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="intro"><i class="fas fa-info-circle nav-icon"></i><span class="nav-text">مقدمة الملف</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="leaders"><i class="fas fa-quote-right nav-icon"></i><span class="nav-text">كلمات القادة</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="cv"><i class="fas fa-user-tie nav-icon"></i><span class="nav-text">السيرة الذاتية</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="performance"><i class="fas fa-chart-line nav-icon"></i><span class="nav-text">شواهد الأداء</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="documentation"><i class="fas fa-clipboard-check nav-icon"></i><span class="nav-text">التوثيق والمتابعة</span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-tab="improvement"><i class="fas fa-tasks nav-icon"></i><span class="nav-text">خطة التحسين</span></a></li>
+        </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-layout">
+        <div class="content-area">
+            <!-- Home Tab: البيانات العامة -->
+            <div class="tab-content active" id="home-content">
+                <h2>البيانات الأساسية</h2>
+                <div class="form-group"><label for="teacherNameInput">اسم المعلم</label><input type="text" id="teacherNameInput" class="form-control"></div>
+                <div class="form-group"><label for="educationDeptInput">الإدارة التعليمية</label><input type="text" id="educationDeptInput" class="form-control"></div>
+                <div class="form-group"><label for="schoolNameInput">المدرسة</label><input type="text" id="schoolNameInput" class="form-control"></div>
+                <div class="form-group"><label for="academicYearInput">العام الدراسي</label><input type="text" id="academicYearInput" class="form-control"></div>
+                <button class="btn" id="saveBasicDataBtn">حفظ البيانات الأساسية</button>
+            </div>
+            
+            <!-- Introduction Tab -->
+            <div class="tab-content" id="intro-content">
+                <h2>مقدمة الملف...</h2>
+                <!-- محتوى المقدمة هنا -->
+            </div>
+
+            <!-- Leaders Tab -->
+            <div class="tab-content" id="leaders-content">
+                 <h2>كلمات القادة...</h2>
+                 <!-- محتوى كلمات القادة هنا -->
+            </div>
+
+            <!-- CV Tab: السيرة الذاتية -->
+            <div class="tab-content" id="cv-content">
+                <h2>السيرة الذاتية</h2>
+                <div class="cv-section">
+                    <h3>البيانات الشخصية</h3>
+                    <div class="form-group"><label for="fullNameInput">الاسم الكامل</label><input type="text" id="fullNameInput" class="form-control"></div>
+                    <div class="form-group"><label for="specialtyInput">التخصص</label><input type="text" id="specialtyInput" class="form-control"></div>
+                    <div class="form-group"><label for="qualificationInput">المؤهل العلمي</label><input type="text" id="qualificationInput" class="form-control"></div>
+                    <div class="form-group"><label for="yearsOfExperienceInput">سنوات الخبرة</label><input type="number" id="yearsOfExperienceInput" class="form-control"></div>
+                    <button class="btn" id="saveCvDataBtn">حفظ البيانات الشخصية</button>
+                </div>
+                <div class="cv-section">
+                    <h3>الرخصة المهنية</h3>
+                    <input type="file" id="licenseUpload" accept="image/*" style="display: none;">
+                    <button class="btn" onclick="document.getElementById('licenseUpload').click()">اختر صورة الرخصة</button>
+                    <div class="certificate-container" id="licensePreviewContainer"></div>
+                </div>
+                <div class="cv-section">
+                    <h3>شهادات الشكر والتقدير</h3>
+                    <input type="file" id="certificateUpload" accept="image/*" style="display: none;">
+                    <button class="btn" onclick="document.getElementById('certificateUpload').click()">إضافة شهادة</button>
+                    <div class="certificate-container" id="certificatesContainer"></div>
+                </div>
+                 <div class="cv-section">
+                    <h3>الدورات التدريبية</h3>
+                    <!-- فورم إضافة دورة... -->
+                    <div class="courses-list" id="coursesList"></div>
+                </div>
+            </div>
+
+            <!-- Performance Tab -->
+            <div class="tab-content" id="performance-content">
+                 <h2>شواهد الأداء الوظيفي</h2>
+                 <div id="performanceItems"></div>
+                 <div class="performance-result">
+                    <div class="result-title">نتيجة التقييم الذاتي (من 5)</div>
+                    <div class="result-score" id="totalScore">0.0</div>
+                    <div class="result-rating" id="ratingText">-</div>
+                    <div class="result-details" id="scoreDetails"></div>
+                </div>
+            </div>
+            
+            <!-- Other Tabs... -->
+            <div class="tab-content" id="documentation-content"><h2>التوثيق والمتابعة...</h2></div>
+            <div class="tab-content" id="improvement-content"><h2>خطة التحسين...</h2></div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="image-preview-modal" id="imagePreviewModal">
+        <span class="close-preview" onclick="this.parentElement.style.display='none'">&times;</span>
+        <img class="preview-image" id="previewImage">
+    </div>
+    
+    <!-- Footer -->
+    <footer><div class="container"><p>الحقوق محفوظة</p></div></footer>
+
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // =================================================================
+        // ======================= إعدادات SUPABASE ========================
+        // =================================================================
+        
+        const SUPABASE_URL = 'ضع رابط المشروع (URL) هنا'; // هام: استبدل هذا
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5iYnFqenBnZWZ1aHlrY21hc2h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MzQ4NTEsImV4cCI6MjA3NzUxMDg1MX0.Oql2Hx4rX2c9qJ-KX9g1COOVwdfmJbcCunUCiTd82ZQ'; // هذا هو مفتاحك
+
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // =================================================================
+        // =================== معرّف المعلم (للتجربة) ====================
+        // =================================================================
+        
+        // هام جدًا: بعد إنشاء أول سجل للمعلم في جدول teachers
+        // اذهب إلى الجدول، انسخ قيمة الـ "id" الخاصة به والصقها هنا.
+        const TEACHER_ID = 'استبدل هذا بمعرف المعلم من قاعدة البيانات';
+
+        // =================================================================
+        // ========================= الكود الرئيسي ==========================
+        // =================================================================
+
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        async function initializeApp() {
+            setupEventListeners();
+            await loadAllData();
+        }
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector('.nav-link.active').classList.remove('active');
+                    document.querySelector('.tab-content.active').classList.remove('active');
+                    link.classList.add('active');
+                    document.getElementById(link.dataset.tab + '-content').classList.add('active');
+                });
+            });
+
+            // Save Buttons
+            document.getElementById('saveBasicDataBtn').addEventListener('click', saveBasicData);
+            document.getElementById('saveCvDataBtn').addEventListener('click', saveCvData);
+            
+            // File Uploads
+            document.getElementById('licenseUpload').addEventListener('change', (e) => uploadLicenseImage(e.target.files[0]));
+            document.getElementById('certificateUpload').addEventListener('change', (e) => uploadCertificateImage(e.target.files[0]));
+        }
+
+        async function loadAllData() {
+            if (!TEACHER_ID || TEACHER_ID === 'استبدل هذا بمعرف المعلم من قاعدة البيانات') {
+                console.error("الرجاء تحديد قيمة TEACHER_ID في الكود.");
+                alert("خطأ: لم يتم تحديد معرّف المعلم. يرجى مراجعة الكود.");
+                return;
+            }
+            
+            const { data, error } = await supabase
+                .from('teachers')
+                .select(`
+                    *,
+                    certificates ( * ),
+                    courses ( * ),
+                    performance_data ( * )
+                `)
+                .eq('id', TEACHER_ID)
+                .single();
+
+            if (error) {
+                console.error("خطأ في جلب البيانات:", error);
+                return;
+            }
+            
+            if (data) {
+                // تعبئة البيانات الأساسية
+                document.getElementById('teacherNameInput').value = data.full_name || '';
+                document.getElementById('educationDeptInput').value = data.education_dept || '';
+                document.getElementById('schoolNameInput').value = data.school_name || '';
+                document.getElementById('academicYearInput').value = data.academic_year || '';
+                updateHeaderInfo(data);
+
+                // تعبئة بيانات السيرة الذاتية
+                document.getElementById('fullNameInput').value = data.full_name || '';
+                document.getElementById('specialtyInput').value = data.specialty || '';
+                document.getElementById('qualificationInput').value = data.qualification || '';
+                document.getElementById('yearsOfExperienceInput').value = data.years_of_experience || '';
+
+                // عرض صورة الرخصة
+                renderLicenseImage(data.license_image_url);
+
+                // عرض الشهادات
+                renderCertificates(data.certificates);
+                
+                // عرض الدورات (يمكنك إضافتها لاحقًا)
+                // renderCourses(data.courses);
+            }
+        }
+
+        // ---------- دوال الحفظ والتحديث ----------
+
+        async function saveBasicData() {
+            const updates = {
+                full_name: document.getElementById('teacherNameInput').value,
+                education_dept: document.getElementById('educationDeptInput').value,
+                school_name: document.getElementById('schoolNameInput').value,
+                academic_year: document.getElementById('academicYearInput').value,
+            };
+            
+            const { error } = await supabase.from('teachers').update(updates).eq('id', TEACHER_ID);
+            if (error) {
+                console.error('خطأ في حفظ البيانات الأساسية:', error);
+                alert('فشل حفظ البيانات');
+            } else {
+                alert('تم حفظ البيانات الأساسية بنجاح!');
+                updateHeaderInfo(updates);
+            }
+        }
+        
+        async function saveCvData() {
+            const updates = {
+                full_name: document.getElementById('fullNameInput').value,
+                specialty: document.getElementById('specialtyInput').value,
+                qualification: document.getElementById('qualificationInput').value,
+                years_of_experience: document.getElementById('yearsOfExperienceInput').value,
+            };
+
+            const { error } = await supabase.from('teachers').update(updates).eq('id', TEACHER_ID);
+            if (error) {
+                console.error('خطأ في حفظ بيانات السيرة الذاتية:', error);
+                 alert('فشل حفظ البيانات');
+            } else {
+                alert('تم حفظ بيانات السيرة الذاتية بنجاح!');
+                 updateHeaderInfo({ full_name: updates.full_name });
+            }
+        }
+        
+        // ---------- دوال رفع وعرض الملفات ----------
+
+        async function uploadFile(file, bucket, path) {
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(path, file, {
+                    cacheControl: '3600',
+                    upsert: true // للكتابة فوق الملف القديم إذا وجد
+                });
+
+            if (error) {
+                console.error('خطأ في الرفع:', error);
+                return null;
+            }
+            
+            // جلب الرابط العام للملف
+            const { data: { publicUrl } } = supabase.storage.from(bucket).getPublicUrl(path);
+            return publicUrl;
+        }
+
+        async function uploadLicenseImage(file) {
+            if (!file) return;
+            const filePath = `${TEACHER_ID}/license/${file.name}`;
+            const publicUrl = await uploadFile(file, 'teacher_files', filePath);
+
+            if (publicUrl) {
+                const { error } = await supabase.from('teachers').update({ license_image_url: publicUrl }).eq('id', TEACHER_ID);
+                if (error) console.error("فشل تحديث رابط الرخصة:", error);
+                else renderLicenseImage(publicUrl);
+            }
+        }
+        
+        async function uploadCertificateImage(file) {
+            if (!file) return;
+            const filePath = `${TEACHER_ID}/certificates/${Date.now()}_${file.name}`;
+            const publicUrl = await uploadFile(file, 'teacher_files', filePath);
+
+            if (publicUrl) {
+                const { data, error } = await supabase.from('certificates').insert({ teacher_id: TEACHER_ID, image_url: publicUrl }).select();
+                if (error) console.error("فشل حفظ الشهادة:", error);
+                else addCertificateToDOM(data[0]);
+            }
+        }
+
+        async function deleteCertificate(certId, element) {
+            if (!confirm("هل أنت متأكد من حذف هذه الشهادة؟")) return;
+            const { error } = await supabase.from('certificates').delete().eq('id', certId);
+            if (error) {
+                console.error("فشل الحذف:", error);
+                alert("فشل حذف الشهادة");
+            } else {
+                element.remove();
+            }
+        }
+
+        // ---------- دوال تحديث الواجهة (DOM) ----------
+
+        function updateHeaderInfo(data) {
+            document.getElementById('headerTeacherName').textContent = data.full_name || '-';
+            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (data.education_dept || '-');
+            document.getElementById('schoolName').textContent = 'المدرسة: ' + (data.school_name || '-');
+            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (data.academic_year || '-');
+        }
+
+        function renderLicenseImage(url) {
+            const container = document.getElementById('licensePreviewContainer');
+            container.innerHTML = '';
+            if (url) {
+                const item = document.createElement('div');
+                item.className = 'certificate-item';
+                item.innerHTML = `<img src="${url}" alt="الرخصة المهنية">`;
+                item.onclick = () => showImagePreview(url);
+                container.appendChild(item);
+            }
+        }
+
+        function renderCertificates(certs) {
+            const container = document.getElementById('certificatesContainer');
+            container.innerHTML = '';
+            if (certs) {
+                certs.forEach(cert => addCertificateToDOM(cert));
+            }
+        }
+
+        function addCertificateToDOM(cert) {
+            const container = document.getElementById('certificatesContainer');
+            const item = document.createElement('div');
+            item.className = 'certificate-item';
+            item.innerHTML = `
+                <img src="${cert.image_url}" alt="شهادة">
+                <button class="delete-btn" style="position:absolute; top:5px; right:5px;">×</button>
+            `;
+            item.onclick = (e) => {
+                if(e.target.tagName !== 'BUTTON') showImagePreview(cert.image_url);
+            };
+            item.querySelector('.delete-btn').onclick = (e) => {
+                e.stopPropagation();
+                deleteCertificate(cert.id, item);
+            };
+            container.appendChild(item);
+        }
+
+        function showImagePreview(url) {
+            document.getElementById('previewImage').src = url;
+            document.getElementById('imagePreviewModal').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -6,6 +6,8 @@
     <title>ملف شواهد الأداء الوظيفي للمعلم</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -108,7 +110,7 @@
             right: 0;
             height: 100%;
             z-index: 100;
-            padding-top: 180px; /* Changed from 200px to 180px */
+            padding-top: 180px;
         }
         
         .nav-list {
@@ -146,30 +148,30 @@
         
         .nav-text {
             position: absolute;
-            right: 70px; /* Position on the right side of the sidebar */
-            top: 0; /* Align with the top of the nav-link */
+            right: 70px; 
+            top: 0; 
             background-color: #333;
-            padding: 8px 15px 8px 15px; /* Added padding on both sides */
-            border-radius: 8px 0 0 8px; /* Rounded corners only on left side, increased radius */
+            padding: 8px 15px 8px 15px; 
+            border-radius: 8px 0 0 8px; 
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.2); /* Enhanced shadow */
-            height: 100%; /* Match height of nav-link */
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2); 
+            height: 100%; 
             display: flex;
             align-items: center;
             margin: 0;
-            font-weight: bold; /* Make text bold */
+            font-weight: bold; 
         }
         
         .nav-link:hover .nav-text {
             opacity: 1;
             visibility: visible;
-            right: 50px; /* Changed from 65px to 50px */
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
-            color: white; /* Ensure text is white against gradient */
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Add text shadow for better readability */
+            right: 50px; 
+            background: linear-gradient(to right, #2196F3, #4CAF50); 
+            color: white; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2); 
         }
         
         /* Content Area */
@@ -272,8 +274,11 @@
         .footer-content {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; 
             gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
         .footer-logo {
@@ -309,7 +314,7 @@
             right: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to bottom, #2196F3, #4CAF50);
         }
         
         .intro-section h2 {
@@ -412,7 +417,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to right, #2196F3, #4CAF50); 
         }
         
         .values-container h2 {
@@ -446,7 +451,7 @@
         .value-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); 
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -493,7 +498,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to right, #2196F3, #4CAF50);
         }
         
         .leaders-container {
@@ -526,7 +531,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to right, #2196F3, #4CAF50);
         }
         
         .leader-image-container {
@@ -573,7 +578,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 2px;
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to right, #2196F3, #4CAF50);
         }
         
         .leader-content p {
@@ -768,13 +773,13 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to bottom, #2196F3, #4CAF50);
             cursor: pointer;
             transition: all 0.3s;
         }
         
         .rating-slider::-webkit-slider-thumb:hover {
-            background: linear-gradient(to bottom, #0b7dda, #3d8b40); /* Darker blue first, then darker green */
+            background: linear-gradient(to bottom, #0b7dda, #3d8b40);
             transform: scale(1.2);
         }
         
@@ -782,14 +787,14 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to bottom, #2196F3, #4CAF50);
             cursor: pointer;
             transition: all 0.3s;
             border: none;
         }
         
         .rating-slider::-moz-range-thumb:hover {
-            background: linear-gradient(to bottom, #0b7dda, #3d8b40); /* Darker blue first, then darker green */
+            background: linear-gradient(to bottom, #0b7dda, #3d8b40);
             transform: scale(1.2);
         }
         
@@ -813,7 +818,7 @@
         }
         
         .rating-number.active {
-            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to bottom, #2196F3, #4CAF50);
             color: white;
         }
         
@@ -879,7 +884,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            background: linear-gradient(to right, #2196F3, #4CAF50);
         }
         
         .result-title {
@@ -1083,125 +1088,35 @@
         
         /* Responsive Styles */
         @media (max-width: 768px) {
-            body {
-                padding-right: 60px; /* Smaller padding for sidebar on mobile */
-            }
-            
-            .header-top {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo-container {
-                margin-bottom: 10px;
-                margin-left: 0;
-            }
-            
-            .header-info {
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            .header-info-row {
-                flex-direction: row; /* Keep as row on mobile */
-                flex-wrap: wrap; /* Allow wrapping if needed */
-                justify-content: center;
-                gap: 10px; /* Smaller gap on mobile */
-            }
-            
-            .header-info p {
-                white-space: nowrap; /* Prevent text wrapping */
-                font-size: 12px; /* Smaller font size on mobile */
-            }
-            
-            .sidebar {
-                width: 60px;
-            }
-            
-            .nav-link {
-                padding: 12px 0;
-            }
-            
-            .nav-icon {
-                font-size: 18px;
-            }
-            
-            .leader-card {
-                max-width: 100%;
-            }
-            
-            .vision-mission-container {
-                flex-direction: column;
-            }
-            
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Adjust modal for mobile */
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
-                padding: 15px;
-            }
-            
-            /* Adjust form elements for mobile */
-            .form-control, .btn {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
+            body { padding-right: 60px; }
+            .header-top { flex-direction: column; text-align: center; }
+            .logo-container { margin-bottom: 10px; margin-left: 0; }
+            .header-info { text-align: center; margin-bottom: 10px; }
+            .header-info-row { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .header-info p { white-space: nowrap; font-size: 12px; }
+            .sidebar { width: 60px; }
+            .nav-link { padding: 12px 0; }
+            .nav-icon { font-size: 18px; }
+            .leader-card { max-width: 100%; }
+            .vision-mission-container { flex-direction: column; }
+            .values-grid { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; margin: 5% auto; padding: 15px; }
+            .form-control, .btn { font-size: 14px; padding: 8px 15px; }
         }
         
-        /* For very small screens */
         @media (max-width: 480px) {
-            body {
-                padding-right: 50px; /* Even smaller padding for very small screens */
-            }
-            
-            .sidebar {
-                width: 50px;
-            }
-            
-            .site-title {
-                font-size: 16px;
-            }
-            
-            .teacher-name {
-                font-size: 16px;
-            }
-            
-            .header-info {
-                font-size: 12px;
-            }
-            
-            .header-info-row {
-                gap: 8px; /* Even smaller gap for very small screens */
-            }
-            
-            .header-info p {
-                font-size: 11px; /* Even smaller font for very small screens */
-            }
-            
-            .nav-text {
-                padding: 5px 10px;
-                font-size: 12px;
-            }
+            body { padding-right: 50px; }
+            .sidebar { width: 50px; }
+            .site-title, .teacher-name { font-size: 16px; }
+            .header-info { font-size: 12px; }
+            .header-info-row { gap: 8px; }
+            .header-info p { font-size: 11px; }
+            .nav-text { padding: 5px 10px; font-size: 12px; }
         }
         
-        /* Special style for mobile header info */
         @media (max-width: 380px) {
-            .header-info-row {
-                display: flex;
-                flex-direction: row; /* Keep as row */
-                justify-content: center;
-                flex-wrap: wrap; /* Allow wrapping */
-                gap: 5px; /* Very small gap */
-            }
-            
-            .header-info p {
-                margin: 0 5px; /* Add some horizontal margin */
-                font-size: 10px; /* Very small font */
-            }
+            .header-info-row { flex-wrap: wrap; gap: 5px; }
+            .header-info p { margin: 0 5px; font-size: 10px; }
         }
     </style>
 </head>
@@ -1230,48 +1145,13 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <ul class="nav-list">
-            <li class="nav-item">
-                <a href="#" class="nav-link active" data-tab="home">
-                    <i class="fas fa-home nav-icon"></i>
-                    <span class="nav-text">الرئيسية</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="intro">
-                    <i class="fas fa-info-circle nav-icon"></i>
-                    <span class="nav-text">مقدمة الملف</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="leaders">
-                    <i class="fas fa-quote-right nav-icon"></i>
-                    <span class="nav-text">كلمات القادة</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="cv">
-                    <i class="fas fa-user-tie nav-icon"></i>
-                    <span class="nav-text">السيرة الذاتية</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="performance">
-                    <i class="fas fa-chart-line nav-icon"></i>
-                    <span class="nav-text">شواهد الأداء</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="documentation">
-                    <i class="fas fa-clipboard-check nav-icon"></i>
-                    <span class="nav-text">التوثيق والمتابعة</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" data-tab="improvement">
-                    <i class="fas fa-tasks nav-icon"></i>
-                    <span class="nav-text">خطة التحسين</span>
-                </a>
-            </li>
+            <li class="nav-item"> <a href="#" class="nav-link active" data-tab="home"> <i class="fas fa-home nav-icon"></i> <span class="nav-text">الرئيسية</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="intro"> <i class="fas fa-info-circle nav-icon"></i> <span class="nav-text">مقدمة الملف</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="leaders"> <i class="fas fa-quote-right nav-icon"></i> <span class="nav-text">كلمات القادة</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="cv"> <i class="fas fa-user-tie nav-icon"></i> <span class="nav-text">السيرة الذاتية</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="performance"> <i class="fas fa-chart-line nav-icon"></i> <span class="nav-text">شواهد الأداء</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="documentation"> <i class="fas fa-clipboard-check nav-icon"></i> <span class="nav-text">التوثيق والمتابعة</span> </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link" data-tab="improvement"> <i class="fas fa-tasks nav-icon"></i> <span class="nav-text">خطة التحسين</span> </a> </li>
         </ul>
     </div>
     
@@ -1282,26 +1162,14 @@
             <!-- Home Tab -->
             <div class="tab-content active" id="home-content">
                 <h2>البيانات الأساسية</h2>
-                <div class="form-group">
-                    <label for="teacherNameInput">اسم المعلم</label>
-                    <input type="text" id="teacherNameInput" class="form-control" placeholder="أدخل اسم المعلم">
-                </div>
-                <div class="form-group">
-                    <label for="educationDeptInput">الإدارة التعليمية</label>
-                    <input type="text" id="educationDeptInput" class="form-control" placeholder="أدخل اسم الإدارة التعليمية">
-                </div>
-                <div class="form-group">
-                    <label for="schoolNameInput">المدرسة</label>
-                    <input type="text" id="schoolNameInput" class="form-control" placeholder="أدخل اسم المدرسة">
-                </div>
-                <div class="form-group">
-                    <label for="academicYearInput">العام الدراسي</label>
-                    <input type="text" id="academicYearInput" class="form-control" placeholder="أدخل العام الدراسي">
-                </div>
+                <div class="form-group"> <label for="teacherNameInput">اسم المعلم</label> <input type="text" id="teacherNameInput" class="form-control" placeholder="أدخل اسم المعلم"> </div>
+                <div class="form-group"> <label for="educationDeptInput">الإدارة التعليمية</label> <input type="text" id="educationDeptInput" class="form-control" placeholder="أدخل اسم الإدارة التعليمية"> </div>
+                <div class="form-group"> <label for="schoolNameInput">المدرسة</label> <input type="text" id="schoolNameInput" class="form-control" placeholder="أدخل اسم المدرسة"> </div>
+                <div class="form-group"> <label for="academicYearInput">العام الدراسي</label> <input type="text" id="academicYearInput" class="form-control" placeholder="أدخل العام الدراسي"> </div>
                 <button class="btn" id="saveBasicDataBtn">حفظ البيانات</button>
             </div>
             
-            <!-- Introduction Tab - Enhanced Design -->
+            <!-- Introduction Tab -->
             <div class="tab-content" id="intro-content">
                 <div class="intro-section">
                     <h2>مقدمة ملف شواهد الأداء الوظيفي للمعلم</h2>
@@ -1309,214 +1177,72 @@
                     <p>ومن هذا المنطلق، جاء إعداد هذا الملف الخاص بـ شواهد الأداء الوظيفي للمعلم، ليُبرز ما تم إنجازه من ممارسات تربوية وتعليمية تسهم في تحسين نواتج التعلم، وتوثيق العمل المهني المستند إلى معايير الجودة والتميز، وقياس مستوى تحقق المهارات والمعارف بما يدعم المسيرة التعليمية.</p>
                     <p>وإيمانًا بأن المعلم هو حجر الزاوية في تطوير التعليم، فإن هذا الملف يُعد انعكاسًا حقيقيًا لدوره الريادي في بناء الأجيال وصناعة المستقبل، مستلهمين في ذلك كلمات ولاة أمرنا التي تُعد نبراسًا نهتدي به.</p>
                 </div>
-                
                 <div class="vision-mission-container">
-                    <div class="vision-box">
-                        <h2><i class="fas fa-eye"></i> الرؤية</h2>
-                        <p>تحقيق تعليم نوعي عالي الجودة، يُسهم في بناء جيل واعٍ ومتمكن، منافس عالميًا، ومؤمن بقيمه الوطنية.</p>
-                    </div>
-                    
-                    <div class="mission-box">
-                        <h2><i class="fas fa-bullseye"></i> الرسالة</h2>
-                        <p>تقديم تعليم محفّز على الإبداع والتميّز، قائم على معايير مهنية، يعزز من دور المعلم في قيادة التعلم، ويركز على تمكين المتعلم من المهارات والمعارف اللازمة لمواكبة التغيرات العالمية.</p>
-                    </div>
+                    <div class="vision-box"> <h2><i class="fas fa-eye"></i> الرؤية</h2> <p>تحقيق تعليم نوعي عالي الجودة، يُسهم في بناء جيل واعٍ ومتمكن، منافس عالميًا، ومؤمن بقيمه الوطنية.</p> </div>
+                    <div class="mission-box"> <h2><i class="fas fa-bullseye"></i> الرسالة</h2> <p>تقديم تعليم محفّز على الإبداع والتميّز، قائم على معايير مهنية، يعزز من دور المعلم في قيادة التعلم، ويركز على تمكين المتعلم من المهارات والمعارف اللازمة لمواكبة التغيرات العالمية.</p> </div>
                 </div>
-                
                 <div class="values-container">
                     <h2>القيم</h2>
                     <div class="values-grid">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-flag"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>المواطنة</h3>
-                                <p>تعزيز الانتماء الوطني والاعتزاز بالهوية السعودية.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>الجودة</h3>
-                                <p>الالتزام بمعايير الأداء والتميّز المؤسسي.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>المسؤولية</h3>
-                                <p>أداء الواجبات المهنية بأمانة ومصداقية.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>الابتكار</h3>
-                                <p>دعم الإبداع وتوظيف الحلول التقنية الحديثة.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>التمكين</h3>
-                                <p>بناء القدرات وتطوير الكفاءات التعليمية.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="fas fa-balance-scale"></i>
-                            </div>
-                            <div class="value-content">
-                                <h3>العدالة</h3>
-                                <p>تحقيق المساواة وتكافؤ الفرص التعليمية.</p>
-                            </div>
-                        </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-flag"></i></div> <div class="value-content"> <h3>المواطنة</h3> <p>تعزيز الانتماء الوطني والاعتزاز بالهوية السعودية.</p> </div> </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-award"></i></div> <div class="value-content"> <h3>الجودة</h3> <p>الالتزام بمعايير الأداء والتميّز المؤسسي.</p> </div> </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-hands-helping"></i></div> <div class="value-content"> <h3>المسؤولية</h3> <p>أداء الواجبات المهنية بأمانة ومصداقية.</p> </div> </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-lightbulb"></i></div> <div class="value-content"> <h3>الابتكار</h3> <p>دعم الإبداع وتوظيف الحلول التقنية الحديثة.</p> </div> </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-users"></i></div> <div class="value-content"> <h3>التمكين</h3> <p>بناء القدرات وتطوير الكفاءات التعليمية.</p> </div> </div>
+                        <div class="value-item"> <div class="value-icon"><i class="fas fa-balance-scale"></i></div> <div class="value-content"> <h3>العدالة</h3> <p>تحقيق المساواة وتكافؤ الفرص التعليمية.</p> </div> </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Leaders Words Tab - Enhanced Design -->
+            <!-- Leaders Words Tab -->
             <div class="tab-content" id="leaders-content">
-                <div class="leaders-header">
-                    <h2>كلمات القادة</h2>
-                </div>
-                
+                <div class="leaders-header"> <h2>كلمات القادة</h2> </div>
                 <div class="leaders-container">
-                    <div class="leader-card">
-                        <div class="leader-image-container">
-                            <img src="https://i.top4top.io/p_3485a0uv82.jpeg" alt="الملك سلمان بن عبدالعزيز" class="leader-image">
-                        </div>
-                        <div class="leader-content">
-                            <h3>كلمة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز آل سعود – حفظه الله</h3>
-                            <p>" إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله ."</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-card">
-                        <div class="leader-image-container">
-                            <img src="https://k.top4top.io/p_3591b3igd1.png" alt="الأمير محمد بن سلمان" class="leader-image">
-                        </div>
-                        <div class="leader-content">
-                            <h3>كلمة صاحب السمو الملكي الأمير محمد بن سلمان بن عبدالعزيز – ولي العهد رئيس مجلس الوزراء – حفظه الله</h3>
-                            <p>" طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله . ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا ."</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leader-card">
-                        <div class="leader-image-container">
-                            <img src="https://h.top4top.io/p_34853oi4r1.jpeg" alt="وزير التعليم" class="leader-image">
-                        </div>
-                        <div class="leader-content">
-                            <h3>كلمة معالي وزير التعليم يوسف البنيان</h3>
-                            <p>" نسعى في وزارة التعليم إلى تطوير المنظومة التعليمية بما يتماشى مع مستهدفات رؤية 2030، من خلال تمكين المعلم، وتحسين نواتج التعلم، وتوفير بيئة تعليمية محفزة للتميّز والإبداع ."</p>
-                        </div>
-                    </div>
+                    <div class="leader-card"> <div class="leader-image-container"> <img src="https://i.top4top.io/p_3485a0uv82.jpeg" alt="الملك سلمان بن عبدالعزيز" class="leader-image"> </div> <div class="leader-content"> <h3>كلمة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز آل سعود – حفظه الله</h3> <p>" إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله ."</p> </div> </div>
+                    <div class="leader-card"> <div class="leader-image-container"> <img src="https://k.top4top.io/p_3591b3igd1.png" alt="الأمير محمد بن سلمان" class="leader-image"> </div> <div class="leader-content"> <h3>كلمة صاحب السمو الملكي الأمير محمد بن سلمان بن عبدالعزيز – ولي العهد رئيس مجلس الوزراء – حفظه الله</h3> <p>" طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله . ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا ."</p> </div> </div>
+                    <div class="leader-card"> <div class="leader-image-container"> <img src="https://h.top4top.io/p_34853oi4r1.jpeg" alt="وزير التعليم" class="leader-image"> </div> <div class="leader-content"> <h3>كلمة معالي وزير التعليم يوسف البنيان</h3> <p>" نسعى في وزارة التعليم إلى تطوير المنظومة التعليمية بما يتماشى مع مستهدفات رؤية 2030، من خلال تمكين المعلم، وتحسين نواتج التعلم، وتوفير بيئة تعليمية محفزة للتميّز والإبداع ."</p> </div> </div>
                 </div>
             </div>
             
             <!-- CV Tab -->
             <div class="tab-content" id="cv-content">
                 <h2>السيرة الذاتية</h2>
-                
                 <div class="cv-section">
                     <h3>البيانات الأساسية</h3>
-                    <div class="form-group">
-                        <label for="fullNameInput">الاسم الكامل</label>
-                        <input type="text" id="fullNameInput" class="form-control" placeholder="أدخل الاسم الكامل">
-                    </div>
-                    <div class="form-group">
-                        <label for="specialtyInput">التخصص</label>
-                        <input type="text" id="specialtyInput" class="form-control" placeholder="أدخل التخصص">
-                    </div>
-                    <div class="form-group">
-                        <label for="qualificationInput">المؤهل العلمي</label>
-                        <input type="text" id="qualificationInput" class="form-control" placeholder="أدخل المؤهل العلمي">
-                    </div>
-                    <div class="form-group">
-                        <label for="yearsOfExperienceInput">سنوات الخبرة</label>
-                        <input type="number" id="yearsOfExperienceInput" class="form-control" placeholder="أدخل عدد سنوات الخبرة">
-                    </div>
+                    <div class="form-group"> <label for="fullNameInput">الاسم الكامل</label> <input type="text" id="fullNameInput" class="form-control" placeholder="أدخل الاسم الكامل"> </div>
+                    <div class="form-group"> <label for="specialtyInput">التخصص</label> <input type="text" id="specialtyInput" class="form-control" placeholder="أدخل التخصص"> </div>
+                    <div class="form-group"> <label for="qualificationInput">المؤهل العلمي</label> <input type="text" id="qualificationInput" class="form-control" placeholder="أدخل المؤهل العلمي"> </div>
+                    <div class="form-group"> <label for="yearsOfExperienceInput">سنوات الخبرة</label> <input type="number" id="yearsOfExperienceInput" class="form-control" placeholder="أدخل عدد سنوات الخبرة"> </div>
                     <button class="btn" id="saveCvDataBtn">حفظ البيانات</button>
                 </div>
-                
                 <div class="cv-section">
                     <h3>الرخصة المهنية</h3>
-                    <div class="form-group">
-                        <label for="licenseUpload">رفع صورة الرخصة المهنية</label>
-                        <input type="file" id="licenseUpload" accept="image/*" style="display: none;">
-                        <button class="btn" id="licenseUploadBtn">اختر صورة الرخصة</button>
-                    </div>
-                    <div class="certificate-container">
-                        <div class="certificate-item" id="licensePreview">
-                            <div class="certificate-placeholder">+</div>
-                        </div>
-                    </div>
+                    <div class="form-group"> <label for="licenseUpload">رفع صورة الرخصة المهنية</label> <input type="file" id="licenseUpload" accept="image/*" style="display: none;"> <button class="btn" id="licenseUploadBtn">اختر صورة الرخصة</button> </div>
+                    <div class="certificate-container"> <div class="certificate-item" id="licensePreview"> <div class="certificate-placeholder">+</div> </div> </div>
                 </div>
-                
                 <div class="cv-section">
                     <h3>شهادات الشكر والتقدير</h3>
-                    <div class="form-group">
-                        <label for="certificateUpload">رفع شهادات الشكر والتقدير (الحد الأقصى 8 شهادات)</label>
-                        <input type="file" id="certificateUpload" accept="image/*" style="display: none;">
-                        <button class="btn" id="certificateUploadBtn">اختر شهادة</button>
-                    </div>
-                    <div class="certificate-container" id="certificatesContainer">
-                        <div class="certificate-item certificate-add">
-                            <div class="certificate-placeholder">+</div>
-                        </div>
-                    </div>
+                    <div class="form-group"> <label for="certificateUpload">رفع شهادات الشكر والتقدير (الحد الأقصى 8 شهادات)</label> <input type="file" id="certificateUpload" accept="image/*" style="display: none;"> <button class="btn" id="certificateUploadBtn">اختر شهادة</button> </div>
+                    <div class="certificate-container" id="certificatesContainer"></div>
                 </div>
-                
                 <div class="cv-section">
                     <h3>الدورات التدريبية</h3>
-                    <div class="form-group">
-                        <label for="courseNameInput">اسم الدورة</label>
-                        <input type="text" id="courseNameInput" class="form-control" placeholder="أدخل اسم الدورة">
-                    </div>
-                    <div class="form-group">
-                        <label for="courseProviderInput">الجهة المقدمة</label>
-                        <input type="text" id="courseProviderInput" class="form-control" placeholder="أدخل اسم الجهة المقدمة">
-                    </div>
-                    <div class="form-group">
-                        <label for="courseDateInput">تاريخ الدورة</label>
-                        <input type="date" id="courseDateInput" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="courseHoursInput">عدد الساعات</label>
-                        <input type="number" id="courseHoursInput" class="form-control" placeholder="أدخل عدد ساعات الدورة">
-                    </div>
+                    <div class="form-group"> <label for="courseNameInput">اسم الدورة</label> <input type="text" id="courseNameInput" class="form-control" placeholder="أدخل اسم الدورة"> </div>
+                    <div class="form-group"> <label for="courseProviderInput">الجهة المقدمة</label> <input type="text" id="courseProviderInput" class="form-control" placeholder="أدخل اسم الجهة المقدمة"> </div>
+                    <div class="form-group"> <label for="courseDateInput">تاريخ الدورة</label> <input type="date" id="courseDateInput" class="form-control"> </div>
+                    <div class="form-group"> <label for="courseHoursInput">عدد الساعات</label> <input type="number" id="courseHoursInput" class="form-control" placeholder="أدخل عدد ساعات الدورة"> </div>
                     <button class="btn" id="addCourseBtn">إضافة دورة</button>
-                    
-                    <div class="courses-list" id="coursesList">
-                        <!-- Courses will be added here dynamically -->
-                    </div>
+                    <div class="courses-list" id="coursesList"></div>
                 </div>
             </div>
             
             <!-- Performance Tab -->
             <div class="tab-content" id="performance-content">
                 <h2>شواهد الأداء الوظيفي</h2>
-                
-                <div id="performanceItems">
-                    <!-- Performance items will be added here dynamically -->
-                </div>
-                
+                <div id="performanceItems"></div>
                 <div class="performance-result">
-                    <div class="result-title">نتيجة التقييم الذاتي (من 5)</div>
-                    <div class="result-score" id="totalScore">0.0</div>
+                    <div class="result-title">نتيجة التقييم الذاتي</div>
+                    <div class="result-score" id="totalScore">0.00</div>
                     <div class="result-rating" id="ratingText">-</div>
                     <div class="result-details" id="scoreDetails"></div>
                 </div>
@@ -1525,53 +1251,21 @@
             <!-- Documentation Tab -->
             <div class="tab-content" id="documentation-content">
                 <h2>التوثيق والمتابعة</h2>
-                
                 <div class="documentation-section">
                     <h3>إضافة متابعة جديدة</h3>
-                    <div class="form-group">
-                        <label for="followupNumber">رقم المتابعة</label>
-                        <select id="followupNumber" class="form-control">
-                            <option value="">اختر رقم المتابعة</option>
-                            <option value="الأولى">الأولى</option>
-                            <option value="الثانية">الثانية</option>
-                            <option value="الثالثة">الثالثة</option>
-                            <option value="الرابعة">الرابعة</option>
-                            <option value="الخامسة">الخامسة</option>
-                            <option value="السادسة">السادسة</option>
-                            <option value="السابعة">السابعة</option>
-                            <option value="الثامنة">الثامنة</option>
-                            <option value="التاسعة">التاسعة</option>
-                            <option value="العاشرة">العاشرة</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="followupDate">تاريخ المتابعة</label>
-                        <input type="date" id="followupDate" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="followupName">اسم المتابع</label>
-                        <input type="text" id="followupName" class="form-control" placeholder="أدخل اسم المتابع">
-                    </div>
-                    <div class="form-group">
-                        <label for="followupNotes">ملاحظات المتابعة</label>
-                        <textarea id="followupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea>
-                    </div>
+                    <div class="form-group"> <label for="followupNumber">رقم المتابعة</label> <select id="followupNumber" class="form-control"> <option value="">اختر رقم المتابعة</option> <option value="الأولى">الأولى</option> <option value="الثانية">الثانية</option> <option value="الثالثة">الثالثة</option> <option value="الرابعة">الرابعة</option> <option value="الخامسة">الخامسة</option> <option value="السادسة">السادسة</option> <option value="السابعة">السابعة</option> <option value="الثامنة">الثامنة</option> <option value="التاسعة">التاسعة</option> <option value="العاشرة">العاشرة</option> </select> </div>
+                    <div class="form-group"> <label for="followupDate">تاريخ المتابعة</label> <input type="date" id="followupDate" class="form-control"> </div>
+                    <div class="form-group"> <label for="followupName">اسم المتابع</label> <input type="text" id="followupName" class="form-control" placeholder="أدخل اسم المتابع"> </div>
+                    <div class="form-group"> <label for="followupNotes">ملاحظات المتابعة</label> <textarea id="followupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea> </div>
                     <button class="btn" id="addFollowupBtn">إضافة المتابعة</button>
                 </div>
-                
                 <div class="documentation-section">
                     <h3>المتابعات المسجلة</h3>
-                    <div id="followupsList">
-                        <!-- Followups will be added here dynamically -->
-                    </div>
+                    <div id="followupsList"></div>
                 </div>
-                
                 <div class="documentation-section">
                     <h3>التوصيات</h3>
-                    <div class="form-group">
-                        <label for="recommendations">التوصيات العامة</label>
-                        <textarea id="recommendations" class="form-control" rows="6" placeholder="أدخل التوصيات العامة"></textarea>
-                    </div>
+                    <div class="form-group"> <label for="recommendations">التوصيات العامة</label> <textarea id="recommendations" class="form-control" rows="6" placeholder="أدخل التوصيات العامة"></textarea> </div>
                     <button class="btn" id="saveRecommendationsBtn">حفظ التوصيات</button>
                 </div>
             </div>
@@ -1579,118 +1273,52 @@
             <!-- Improvement Tab -->
             <div class="tab-content" id="improvement-content">
                 <h2>خطة التحسين المقترحة</h2>
-                
                 <div class="improvement-section">
                     <p>بناءً على التقييم الذاتي وملاحظات المتابعة، يمكن وضع خطة تحسين للجوانب التي تحتاج إلى تطوير في الأداء الوظيفي.</p>
-                    
                     <div class="improvement-form">
-                        <div class="form-group">
-                            <label for="improvementArea">مجال التحسين</label>
-                            <select id="improvementArea" class="form-control">
-                                <option value="">اختر مجال التحسين</option>
-                                <option value="أداء الواجبات الوظيفية">أداء الواجبات الوظيفية</option>
-                                <option value="التفاعل مع المجتمع المهني">التفاعل مع المجتمع المهني</option>
-                                <option value="التفاعل مع أولياء الأمور">التفاعل مع أولياء الأمور</option>
-                                <option value="تنويع استراتيجيات التدريس">تنويع استراتيجيات التدريس</option>
-                                <option value="تحسين نتائج المتعلمين">تحسين نتائج المتعلمين</option>
-                                <option value="إعداد وتنفيذ خطة التعلم">إعداد وتنفيذ خطة التعلم</option>
-                                <option value="توظيف التقنيات والوسائل">توظيف التقنيات والوسائل</option>
-                                <option value="تهيئة البيئة التعليمية">تهيئة البيئة التعليمية</option>
-                                <option value="الإدارة الصفية">الإدارة الصفية</option>
-                                <option value="تحليل نتائج المتعلمين">تحليل نتائج المتعلمين</option>
-                                <option value="تنوع أساليب التقويم">تنوع أساليب التقويم</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="improvementPriority">أولوية التحسين</label>
-                            <select id="improvementPriority" class="form-control">
-                                <option value="">اختر أولوية التحسين</option>
-                                <option value="عالية">عالية</option>
-                                <option value="متوسطة">متوسطة</option>
-                                <option value="منخفضة">منخفضة</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="improvementGoal">هدف التحسين</label>
-                            <input type="text" id="improvementGoal" class="form-control" placeholder="أدخل هدف التحسين">
-                        </div>
-                        <div class="form-group">
-                            <label for="improvementActions">الإجراءات المقترحة</label>
-                            <textarea id="improvementActions" class="form-control" rows="4" placeholder="أدخل الإجراءات المقترحة"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="improvementStartDate">تاريخ البداية</label>
-                            <input type="date" id="improvementStartDate" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="improvementEndDate">تاريخ النهاية</label>
-                            <input type="date" id="improvementEndDate" class="form-control">
-                        </div>
+                        <div class="form-group"> <label for="improvementArea">مجال التحسين</label> <select id="improvementArea" class="form-control"> <option value="">اختر مجال التحسين</option> <option value="أداء الواجبات الوظيفية">أداء الواجبات الوظيفية</option> <option value="التفاعل مع المجتمع المهني">التفاعل مع المجتمع المهني</option> <option value="التفاعل مع أولياء الأمور">التفاعل مع أولياء الأمور</option> <option value="تنويع استراتيجيات التدريس">تنويع استراتيجيات التدريس</option> <option value="تحسين نتائج المتعلمين">تحسين نتائج المتعلمين</option> <option value="إعداد وتنفيذ خطة التعلم">إعداد وتنفيذ خطة التعلم</option> <option value="توظيف التقنيات والوسائل">توظيف التقنيات والوسائل</option> <option value="تهيئة البيئة التعليمية">تهيئة البيئة التعليمية</option> <option value="الإدارة الصفية">الإدارة الصفية</option> <option value="تحليل نتائج المتعلمين">تحليل نتائج المتعلمين</option> <option value="تنوع أساليب التقويم">تنوع أساليب التقويم</option> </select> </div>
+                        <div class="form-group"> <label for="improvementPriority">أولوية التحسين</label> <select id="improvementPriority" class="form-control"> <option value="">اختر أولوية التحسين</option> <option value="عالية">عالية</option> <option value="متوسطة">متوسطة</option> <option value="منخفضة">منخفضة</option> </select> </div>
+                        <div class="form-group"> <label for="improvementGoal">هدف التحسين</label> <input type="text" id="improvementGoal" class="form-control" placeholder="أدخل هدف التحسين"> </div>
+                        <div class="form-group"> <label for="improvementActions">الإجراءات المقترحة</label> <textarea id="improvementActions" class="form-control" rows="4" placeholder="أدخل الإجراءات المقترحة"></textarea> </div>
+                        <div class="form-group"> <label for="improvementStartDate">تاريخ البداية</label> <input type="date" id="improvementStartDate" class="form-control"> </div>
+                        <div class="form-group"> <label for="improvementEndDate">تاريخ النهاية</label> <input type="date" id="improvementEndDate" class="form-control"> </div>
                         <button class="btn" id="addImprovementBtn">إضافة خطة تحسين</button>
                     </div>
-                    
-                    <div class="improvement-list" id="improvementList">
-                        <!-- Improvement plans will be added here dynamically -->
-                    </div>
+                    <div class="improvement-list" id="improvementList"></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Note Modal -->
-    <div class="modal" id="noteModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeNoteModal">&times;</span>
-            <h2>إضافة ملاحظة</h2>
-            <div class="form-group">
-                <label for="noteText">الملاحظة</label>
-                <textarea id="noteText" class="form-control" rows="6" placeholder="أدخل ملاحظتك هنا"></textarea>
-            </div>
-            <button class="btn" id="saveNoteBtn">حفظ الملاحظة</button>
-        </div>
-    </div>
-    
-    <!-- Image Preview Modal -->
-    <div class="image-preview-modal" id="imagePreviewModal">
-        <span class="close-preview" id="closePreviewModal">&times;</span>
-        <div class="image-preview-content">
-            <img src="" alt="معاينة الصورة" class="preview-image" id="previewImage">
-        </div>
-    </div>
-    
-    <!-- PDF Preview Modal -->
-    <div class="image-preview-modal" id="pdfPreviewModal">
-        <span class="close-preview" id="closePdfPreviewModal">&times;</span>
-        <div class="pdf-preview-content" style="display: flex; flex-direction: column; align-items: center; height: 100%; width: 100%; padding: 20px; box-sizing: border-box;">
-            <div class="pdf-header" style="color: white; margin-bottom: 20px; text-align: center;">
-                <h3 id="pdfFileName" style="margin: 0; font-size: 18px;">معاينة ملف PDF</h3>
-                <div style="margin-top: 10px;">
-                    <button id="downloadPdfBtn" class="btn" style="background-color: #4CAF50; margin-left: 10px;">
-                        <i class="fas fa-download"></i> تحميل الملف
-                    </button>
-                    <button id="openPdfBtn" class="btn" style="background-color: #2196F3;">
-                        <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة
-                    </button>
-                </div>
-            </div>
-            <iframe id="pdfViewer" style="width: 90%; height: 80%; border: none; background-color: white; border-radius: 8px;"></iframe>
-        </div>
-    </div>
+    <!-- Modals -->
+    <div class="modal" id="noteModal"> <div class="modal-content"> <span class="close-modal" id="closeNoteModal">&times;</span> <h2>إضافة ملاحظة</h2> <div class="form-group"> <label for="noteText">الملاحظة</label> <textarea id="noteText" class="form-control" rows="6" placeholder="أدخل ملاحظتك هنا"></textarea> </div> <button class="btn" id="saveNoteBtn">حفظ الملاحظة</button> </div> </div>
+    <div class="image-preview-modal" id="imagePreviewModal"> <span class="close-preview" id="closePreviewModal">&times;</span> <div class="image-preview-content"> <img src="" alt="معاينة الصورة" class="preview-image" id="previewImage"> </div> </div>
+    <div class="image-preview-modal" id="pdfPreviewModal"> <span class="close-preview" id="closePdfPreviewModal">&times;</span> <div class="pdf-preview-content" style="display: flex; flex-direction: column; align-items: center; height: 100%; width: 100%; padding: 20px; box-sizing: border-box;"> <div class="pdf-header" style="color: white; margin-bottom: 20px; text-align: center;"> <h3 id="pdfFileName" style="margin: 0; font-size: 18px;">معاينة ملف PDF</h3> <div style="margin-top: 10px;"> <button id="downloadPdfBtn" class="btn" style="background-color: #4CAF50; margin-left: 10px;"> <i class="fas fa-download"></i> تحميل الملف </button> <button id="openPdfBtn" class="btn" style="background-color: #2196F3;"> <i class="fas fa-external-link-alt"></i> فتح في نافذة جديدة </button> </div> </div> <iframe id="pdfViewer" style="width: 90%; height: 80%; border: none; background-color: white; border-radius: 8px;"></iframe> </div> </div>
     
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <!-- تم تعديل الترتيب والرابط هنا -->
+                <span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span>
                 <a href="https://www.rasmcom.com" target="_blank">
                     <img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo" title="زيارة موقع رسم">
                 </a>
-                <span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span>
             </div>
         </div>
     </footer>
     
     <script>
+        // --- SUPABASE SETUP ---
+        // تم إدخال البيانات الخاصة بك هنا، الكود جاهز للعمل
+        const SUPABASE_URL = "https://nbbqjzpefuhykcmashy.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5iYnFqenBnZWZ1aHlrY21hc2h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MzQ4NTEsImV4cCI6MjA3NzUxMDg1MX0.Oql2Hx4rX2c9qJ-KX9g1COOVwdfmJbcCunUCiTd82ZQ";
+        
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // This application assumes a single-user context. All data is linked to PROFILE_ID = 1.
+        const PROFILE_ID = 1;
+
         // Global Variables
         let certificates = [];
         let courses = [];
@@ -1701,221 +1329,660 @@
         
         // Performance Indicators Data
         const performanceIndicators = [
-            { id: 'performance_1', title: 'أداء الواجبات الوظيفية', weight: 10 },
-            { id: 'performance_2', title: 'التفاعل مع المجتمع المهني', weight: 10 },
-            { id: 'performance_3', title: 'التفاعل مع أولياء الأمور', weight: 10 },
-            { id: 'performance_4', title: 'تنويع استراتيجيات التدريس', weight: 10 },
-            { id: 'performance_5', title: 'تحسين نتائج المتعلمين', weight: 10 },
-            { id: 'performance_6', title: 'إعداد وتنفيذ خطة التعلم', weight: 10 },
-            { id: 'performance_7', title: 'توظيف التقنيات والوسائل', weight: 10 },
-            { id: 'performance_8', title: 'تهيئة البيئة التعليمية', weight: 5 },
-            { id: 'performance_9', title: 'الإدارة الصفية', weight: 5 },
-            { id: 'performance_10', title: 'تحليل نتائج المتعلمين', weight: 10 },
-            { id: 'performance_11', title: 'تنوع أساليب التقويم', weight: 10 }
+            { id: 'performance_1', title: 'أداء الواجبات الوظيفية', description: 'مدى التزام المعلم بأداء واجباته الوظيفية وفق اللوائح والأنظمة المعتمدة.', weight: 10 },
+            { id: 'performance_2', title: 'التفاعل مع المجتمع المهني', description: 'مشاركة المعلم في الأنشطة المهنية والتعاون مع الزملاء والمجتمع المدرسي.', weight: 10 },
+            { id: 'performance_3', title: 'التفاعل مع أولياء الأمور', description: 'التواصل الفعال مع أولياء الأمور وإشراكهم في العملية التعليمية.', weight: 10 },
+            { id: 'performance_4', title: 'تنويع استراتيجيات التدريس', description: 'استخدام استراتيجيات تدريس متنوعة تناسب احتياجات المتعلمين وأنماط تعلمهم.', weight: 10 },
+            { id: 'performance_5', title: 'تحسين نتائج المتعلمين', description: 'العمل على تحسين نتائج المتعلمين وتطوير مستوياتهم التحصيلية.', weight: 10 },
+            { id: 'performance_6', title: 'إعداد وتنفيذ خطة التعلم', description: 'إعداد وتنفيذ خطط تعليمية فعالة تحقق أهداف المنهج.', weight: 10 },
+            { id: 'performance_7', title: 'توظيف التقنيات والوسائل', description: 'استخدام التقنيات والوسائل التعليمية المناسبة لتعزيز عملية التعلم.', weight: 10 },
+            { id: 'performance_8', title: 'تهيئة البيئة التعليمية', description: 'تهيئة بيئة تعليمية محفزة وآمنة للمتعلمين.', weight: 5 },
+            { id: 'performance_9', title: 'الإدارة الصفية', description: 'إدارة الصف بفاعلية وتنظيم وقت التعلم بكفاءة.', weight: 5 },
+            { id: 'performance_10', title: 'تحليل نتائج المتعلمين', description: 'تحليل نتائج المتعلمين واستخدامها في تحسين الممارسات التعليمية.', weight: 10 },
+            { id: 'performance_11', title: 'تنوع أساليب التقويم', description: 'استخدام أساليب تقويم متنوعة لقياس تقدم المتعلمين.', weight: 10 }
         ];
         
-        document.addEventListener('DOMContentLoaded', initializeApp);
-
-        function initializeApp() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup UI event listeners immediately, without waiting for data.
             setupEventListeners();
-            loadAllDataFromLocalStorage();
-        }
+
+            // Then, load data from the database.
+            loadAllData();
+        });
         
+        async function loadAllData() {
+            if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+                alert("بيانات الاتصال بـ Supabase غير مكتملة.");
+                return;
+            }
+
+            try {
+                await Promise.all([
+                    loadUserData(),
+                    loadCertificates(),
+                    loadCourses(),
+                    loadPerformanceData(), 
+                    loadDocumentationData(),
+                    loadFollowups(),
+                    loadImprovementPlans()
+                ]);
+            } catch (error) {
+                console.error("An error occurred while loading data:", error);
+                alert("حدث خطأ أثناء تحميل البيانات من قاعدة البيانات. يرجى التأكد من صحة الرابط والمفتاح ومراجعة الـ Console.");
+            }
+        }
+
         function setupEventListeners() {
-            // Navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    document.querySelector('.nav-link.active').classList.remove('active');
-                    document.querySelector('.tab-content.active').classList.remove('active');
+                    const tabId = link.getAttribute('data-tab');
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                     link.classList.add('active');
-                    document.getElementById(`${link.dataset.tab}-content`).classList.add('active');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
                 });
             });
-
-            // Save buttons
-            document.getElementById('saveBasicDataBtn').addEventListener('click', saveAllDataToLocalStorage);
-            document.getElementById('saveCvDataBtn').addEventListener('click', saveAllDataToLocalStorage);
             
-            // Other event listeners can be added here (courses, improvements, etc.)
+            document.getElementById('saveBasicDataBtn').addEventListener('click', async () => {
+                const teacherName = document.getElementById('teacherNameInput').value;
+                const educationDept = document.getElementById('educationDeptInput').value;
+                const schoolName = document.getElementById('schoolNameInput').value;
+                const academicYear = document.getElementById('academicYearInput').value;
+                await saveBasicData(teacherName, educationDept, schoolName, academicYear);
+                updateHeaderInfo({ teacher_name: teacherName, education_dept: educationDept, school_name: schoolName, academic_year: academicYear });
+                alert('تم حفظ البيانات بنجاح');
+            });
+            
+            document.getElementById('saveCvDataBtn').addEventListener('click', async () => {
+                const fullName = document.getElementById('fullNameInput').value;
+                const specialty = document.getElementById('specialtyInput').value;
+                const qualification = document.getElementById('qualificationInput').value;
+                const yearsOfExperience = document.getElementById('yearsOfExperienceInput').value;
+                await saveCvData(fullName, specialty, qualification, yearsOfExperience);
+                alert('تم حفظ بيانات السيرة الذاتية بنجاح');
+            });
+            
+            document.getElementById('licenseUploadBtn').addEventListener('click', () => {
+                document.getElementById('licenseUpload').click();
+            });
+            
+            document.getElementById('licenseUpload').addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const publicURL = await uploadFile(file, 'license');
+                    if (publicURL) {
+                        const { error } = await supabaseClient.from('profiles').update({ license_image_url: publicURL }).eq('id', PROFILE_ID);
+                        if (error) {
+                             alert('خطأ في حفظ رابط الرخصة المهنية');
+                             console.error(error);
+                        } else {
+                            renderLicenseImage(publicURL);
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('certificateUploadBtn').addEventListener('click', () => {
+                if (certificates.length < 8) document.getElementById('certificateUpload').click();
+                else alert('لقد وصلت للحد الأقصى من الشهادات (8 شهادات)');
+            });
+            
+            document.getElementById('certificateUpload').addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const publicURL = await uploadFile(file, 'certificates');
+                    if (publicURL) {
+                        const { data, error } = await supabaseClient.from('certificates').insert({ profile_id: PROFILE_ID, image_url: publicURL }).select();
+                        if (error) { alert('خطأ في حفظ الشهادة'); console.error(error); } 
+                        else { 
+                            certificates.push(data[0]);
+                            renderCertificates(); 
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('addCourseBtn').addEventListener('click', async () => {
+                const courseName = document.getElementById('courseNameInput').value;
+                const courseProvider = document.getElementById('courseProviderInput').value;
+                const courseDate = document.getElementById('courseDateInput').value;
+                const courseHours = document.getElementById('courseHoursInput').value;
+                
+                if (courseName && courseProvider && courseDate && courseHours) {
+                    const course = { profile_id: PROFILE_ID, name: courseName, provider: courseProvider, date: courseDate, hours: courseHours };
+                    const { data, error } = await supabaseClient.from('courses').insert(course).select();
+                    if(error) { alert('خطأ في إضافة الدورة'); console.error(error); } 
+                    else {
+                        courses.push(data[0]);
+                        renderCourses();
+                        document.getElementById('courseNameInput').value = '';
+                        document.getElementById('courseProviderInput').value = '';
+                        document.getElementById('courseDateInput').value = '';
+                        document.getElementById('courseHoursInput').value = '';
+                    }
+                } else {
+                    alert('يرجى ملء جميع حقول الدورة التدريبية');
+                }
+            });
+            
+            document.getElementById('addFollowupBtn').addEventListener('click', async () => {
+                const number = document.getElementById('followupNumber').value;
+                const date = document.getElementById('followupDate').value;
+                const name = document.getElementById('followupName').value;
+                const notes = document.getElementById('followupNotes').value;
+                
+                if (number && date && name) {
+                    if (followups.find(f => f.number === number)) {
+                        alert('هذا الرقم من المتابعة موجود بالفعل.'); return;
+                    }
+                    const followup = { profile_id: PROFILE_ID, number, date, name, notes };
+                    const { data, error } = await supabaseClient.from('followups').insert(followup).select();
+                    if (error) { alert('خطأ في إضافة المتابعة'); console.error(error); } 
+                    else {
+                        followups.push(data[0]);
+                        renderFollowups();
+                        document.getElementById('followupNumber').value = '';
+                        document.getElementById('followupDate').value = '';
+                        document.getElementById('followupName').value = '';
+                        document.getElementById('followupNotes').value = '';
+                        alert('تم إضافة المتابعة بنجاح');
+                    }
+                } else {
+                    alert('يرجى ملء رقم المتابعة والتاريخ واسم المتابع');
+                }
+            });
+            
+            document.getElementById('saveRecommendationsBtn').addEventListener('click', async () => {
+                const recommendations = document.getElementById('recommendations').value;
+                const { error } = await supabaseClient.from('profiles').update({ recommendations: recommendations }).eq('id', PROFILE_ID);
+                if (error) { alert('خطأ في حفظ التوصيات'); console.error(error); } 
+                else { alert('تم حفظ التوصيات بنجاح'); }
+            });
+            
+            document.getElementById('addImprovementBtn').addEventListener('click', async () => {
+                const area = document.getElementById('improvementArea').value;
+                const priority = document.getElementById('improvementPriority').value;
+                const goal = document.getElementById('improvementGoal').value;
+                const actions = document.getElementById('improvementActions').value;
+                const startDate = document.getElementById('improvementStartDate').value;
+                const endDate = document.getElementById('improvementEndDate').value;
+                
+                if (area && priority && goal && actions && startDate && endDate) {
+                    const improvement = { profile_id: PROFILE_ID, area, priority, goal, actions, start_date: startDate, end_date: endDate };
+                    const { data, error } = await supabaseClient.from('improvements').insert(improvement).select();
+                    if (error) { alert('خطأ في إضافة خطة التحسين'); console.error(error); } 
+                    else {
+                        improvements.push(data[0]);
+                        renderImprovementPlans();
+                        document.getElementById('improvementArea').value = '';
+                        document.getElementById('improvementPriority').value = '';
+                        document.getElementById('improvementGoal').value = '';
+                        document.getElementById('improvementActions').value = '';
+                        document.getElementById('improvementStartDate').value = '';
+                        document.getElementById('improvementEndDate').value = '';
+                    }
+                } else {
+                    alert('يرجى ملء جميع حقول خطة التحسين');
+                }
+            });
+            
+            document.getElementById('closeNoteModal').addEventListener('click', () => document.getElementById('noteModal').style.display = 'none');
+            document.getElementById('saveNoteBtn').addEventListener('click', async () => {
+                if (currentNoteItemId) {
+                    const note = document.getElementById('noteText').value;
+                    await updatePerformanceNote(currentNoteItemId, note);
+                    const noteElement = document.querySelector(`#${currentNoteItemId} .performance-note textarea`);
+                    if (noteElement) {
+                        noteElement.value = note;
+                        noteElement.parentElement.style.display = note ? 'block' : 'none';
+                    }
+                    document.getElementById('noteModal').style.display = 'none';
+                    currentNoteItemId = null;
+                }
+            });
+            
+            document.getElementById('closePreviewModal').addEventListener('click', () => document.getElementById('imagePreviewModal').style.display = 'none');
+            document.getElementById('closePdfPreviewModal').addEventListener('click', () => { document.getElementById('pdfPreviewModal').style.display = 'none'; document.getElementById('pdfViewer').src = ''; });
+            document.getElementById('downloadPdfBtn').addEventListener('click', () => downloadFile(document.getElementById('pdfViewer').src, document.getElementById('pdfFileName').textContent));
+            document.getElementById('openPdfBtn').addEventListener('click', () => window.open(document.getElementById('pdfViewer').src, '_blank'));
+            
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('image-preview-modal') || e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
         }
 
-        function saveAllDataToLocalStorage() {
-            // Basic Info
-            localStorage.setItem('teacherName', document.getElementById('teacherNameInput').value);
-            localStorage.setItem('educationDept', document.getElementById('educationDeptInput').value);
-            localStorage.setItem('schoolName', document.getElementById('schoolNameInput').value);
-            localStorage.setItem('academicYear', document.getElementById('academicYearInput').value);
-            
-            // CV Info
-            localStorage.setItem('fullName', document.getElementById('fullNameInput').value);
-            localStorage.setItem('specialty', document.getElementById('specialtyInput').value);
-            localStorage.setItem('qualification', document.getElementById('qualificationInput').value);
-            localStorage.setItem('yearsOfExperience', document.getElementById('yearsOfExperienceInput').value);
-            
-            alert('تم حفظ البيانات بنجاح!');
-            loadAllDataFromLocalStorage(); // Reload to sync all fields and header
+        async function uploadFile(file, folder) {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${folder}/${Date.now()}_${Math.random()}.${fileExt}`;
+            const { error } = await supabaseClient.storage.from('uploads').upload(fileName, file);
+            if (error) { console.error('Upload error:', error); alert('حدث خطأ أثناء رفع الملف.'); return null; }
+            const { data } = supabaseClient.storage.from('uploads').getPublicUrl(fileName);
+            return data.publicUrl;
         }
 
-        function loadAllDataFromLocalStorage() {
-            // Basic Info
-            const teacherName = localStorage.getItem('teacherName') || '';
-            const educationDept = localStorage.getItem('educationDept') || '';
-            const schoolName = localStorage.getItem('schoolName') || '';
-            const academicYear = localStorage.getItem('academicYear') || '';
-            
-            // CV Info
-            const fullName = localStorage.getItem('fullName') || '';
-            const specialty = localStorage.getItem('specialty') || '';
-            const qualification = localStorage.getItem('qualification') || '';
-            const yearsOfExperience = localStorage.getItem('yearsOfExperience') || '';
-
-            // Populate Home tab
-            document.getElementById('teacherNameInput').value = teacherName;
-            document.getElementById('educationDeptInput').value = educationDept;
-            document.getElementById('schoolNameInput').value = schoolName;
-            document.getElementById('academicYearInput').value = academicYear;
-
-            // Populate CV tab
-            document.getElementById('fullNameInput').value = fullName;
-            document.getElementById('specialtyInput').value = specialty;
-            document.getElementById('qualificationInput').value = qualification;
-            document.getElementById('yearsOfExperienceInput').value = yearsOfExperience;
-            
-            // Update Header
-            document.getElementById('headerTeacherName').textContent = teacherName || fullName || '-';
-            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (educationDept || '-');
-            document.getElementById('schoolName').textContent = 'المدرسة: ' + (schoolName || '-');
-            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (academicYear || '-');
-
-            // Load other data like performance, certificates etc.
-            loadPerformanceData();
+        async function deleteFileByUrl(fileUrl) {
+            try {
+                const url = new URL(fileUrl);
+                const filePath = decodeURIComponent(url.pathname.split('/uploads/')[1]);
+                const { error } = await supabaseClient.storage.from('uploads').remove([filePath]);
+                if (error) console.error("Error deleting file from storage:", error);
+            } catch (e) {
+                console.error("Invalid URL for deletion:", fileUrl, e);
+            }
         }
         
-        function loadPerformanceData() {
-            const storedData = localStorage.getItem('performanceData');
-            performanceData = storedData ? JSON.parse(storedData) : [];
-            renderPerformanceItems();
+        async function saveBasicData(teacherName, educationDept, schoolName, academicYear) {
+            const { error } = await supabaseClient.from('profiles').update({ teacher_name: teacherName, education_dept: educationDept, school_name: schoolName, academic_year: academicYear }).eq('id', PROFILE_ID);
+            if (error) console.error('Error saving basic data:', error);
         }
-
+        
+        async function saveCvData(fullName, specialty, qualification, yearsOfExperience) {
+            const { error } = await supabaseClient.from('profiles').update({ full_name: fullName, specialty: specialty, qualification: qualification, years_of_experience: yearsOfExperience }).eq('id', PROFILE_ID);
+            if (error) console.error('Error saving CV data:', error);
+        }
+        
+        function updateHeaderInfo(data) {
+            document.getElementById('headerTeacherName').textContent = data.teacher_name || '-';
+            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (data.education_dept || '-');
+            document.getElementById('schoolName').textContent = 'المدرسة: ' + (data.school_name || '-');
+            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (data.academic_year || '-');
+        }
+        
+        function renderCertificates() {
+            const container = document.getElementById('certificatesContainer');
+            container.innerHTML = '';
+            certificates.forEach(cert => {
+                const item = document.createElement('div');
+                item.className = 'certificate-item';
+                item.innerHTML = `<img src="${cert.image_url}" alt="شهادة"><button class="delete-btn" style="position: absolute; top: 5px; right: 5px;">×</button>`;
+                item.querySelector('img').addEventListener('click', () => showImagePreview(cert.image_url));
+                item.querySelector('.delete-btn').addEventListener('click', (e) => { e.stopPropagation(); deleteCertificate(cert.id, cert.image_url); });
+                container.appendChild(item);
+            });
+            if (certificates.length < 8) {
+                const addItem = document.createElement('div');
+                addItem.className = 'certificate-item certificate-add';
+                addItem.innerHTML = '<div class="certificate-placeholder">+</div>';
+                addItem.addEventListener('click', () => document.getElementById('certificateUpload').click());
+                container.appendChild(addItem);
+            }
+        }
+        
+        async function deleteCertificate(certId, imageUrl) {
+            if (!confirm('هل أنت متأكد من حذف هذه الشهادة؟')) return;
+            await deleteFileByUrl(imageUrl);
+            const { error } = await supabaseClient.from('certificates').delete().eq('id', certId);
+            if (error) { alert('خطأ في حذف الشهادة'); console.error(error); } 
+            else { 
+                certificates = certificates.filter(c => c.id !== certId);
+                renderCertificates(); 
+            }
+        }
+        
+        function renderCourses() {
+            const list = document.getElementById('coursesList');
+            list.innerHTML = '';
+            courses.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(course => {
+                const item = document.createElement('div');
+                item.className = 'course-item';
+                item.innerHTML = `<div><strong>${course.name}</strong><p>الجهة: ${course.provider} | التاريخ: ${formatDate(course.date)} | عدد الساعات: ${course.hours}</p></div><button class="delete-btn" data-id="${course.id}">حذف</button>`;
+                list.appendChild(item);
+            });
+            list.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => deleteCourse(parseInt(btn.dataset.id))));
+        }
+        
+        async function deleteCourse(courseId) {
+            if (!confirm('هل أنت متأكد من حذف هذه الدورة؟')) return;
+            const { error } = await supabaseClient.from('courses').delete().eq('id', courseId);
+            if (error) { alert('خطأ في حذف الدورة'); console.error(error); } 
+            else { 
+                courses = courses.filter(c => c.id !== courseId);
+                renderCourses(); 
+            }
+        }
+        
         function renderPerformanceItems() {
             const container = document.getElementById('performanceItems');
             container.innerHTML = '';
             performanceIndicators.forEach(indicator => {
-                const data = performanceData.find(item => item.id === indicator.id) || { rating: 0 };
-                const itemElement = document.createElement('div');
-                itemElement.className = 'performance-item';
-                itemElement.id = indicator.id;
-                // Simplified HTML for brevity
-                itemElement.innerHTML = `
-                    <h3 class="performance-title">${indicator.title}</h3>
-                    <div class="performance-rating">
-                        <label>التقييم الذاتي</label>
-                        <div class="rating-container">
-                            <span class="rating-value">${data.rating}</span>
-                            <div class="rating-slider-container">
-                                <input type="range" min="0" max="5" step="1" value="${data.rating}" class="rating-slider" data-id="${indicator.id}">
-                                <div class="rating-numbers">
-                                    ${[0,1,2,3,4,5].map(n => `<span class="rating-number ${data.rating === n ? 'active' : ''}" data-value="${n}">${n}</span>`).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(itemElement);
+                const data = performanceData.find(item => item.indicator_id === indicator.id) || { indicator_id: indicator.id, rating: 0, note: '', link_url: '', files: [] };
+                const item = document.createElement('div');
+                item.className = 'performance-item';
+                item.id = indicator.id;
+                item.innerHTML = `<div class="performance-header"><h3 class="performance-title">${indicator.title} (${indicator.weight}%)</h3><button class="note-btn" data-id="${indicator.id}"><i class="fas fa-sticky-note note-icon"></i></button></div><p class="performance-description">${indicator.description}</p><div class="performance-uploads"><label>الشواهد</label><div class="upload-container" id="uploads_${indicator.id}"></div><div class="link-section" style="margin-top: 15px;"><label>رابط شواهد الأداء (اختياري)</label><div style="display: flex; gap: 10px; margin-top: 5px;"><input type="url" class="form-control link-input" placeholder="أدخل رابط الشواهد" data-id="${indicator.id}" value="${data.link_url || ''}"><button type="button" class="btn add-link-btn" data-id="${indicator.id}" style="background-color: #4CAF50;">حفظ الرابط</button></div><div class="links-display" id="links_${indicator.id}"></div></div></div><div class="performance-rating"><label>التقييم الذاتي</label><div class="rating-container"><span class="rating-value">${data.rating}</span><div class="rating-slider-container"><input type="range" min="0" max="5" step="1" value="${data.rating}" class="rating-slider" data-id="${indicator.id}"><div class="rating-numbers">${[0,1,2,3,4,5].map(n => `<span class="rating-number ${data.rating === n ? 'active' : ''}" data-value="${n}">${n}</span>`).join('')}</div></div></div></div><div class="performance-note" style="${data.note ? 'display: block;' : 'display: none;'}"><label>الملاحظات</label><textarea readonly>${data.note || ''}</textarea></div>`;
+                container.appendChild(item);
+                
+                const uploadContainer = item.querySelector(`#uploads_${indicator.id}`);
+                data.files?.forEach(file => uploadContainer.appendChild(createFileElement(file, indicator.id)));
+                const uploadButton = document.createElement('div');
+                uploadButton.className = 'upload-item upload-add';
+                uploadButton.dataset.id = indicator.id;
+                uploadButton.innerHTML = '<div class="upload-placeholder">+</div>';
+                uploadContainer.appendChild(uploadButton);
+                
+                updateLinkDisplay(indicator.id, data.link_url, indicator.title);
             });
             addPerformanceEventListeners();
             calculateTotalScore();
         }
+        
+        function createFileElement(file, performanceId) {
+            const item = document.createElement('div');
+            item.className = 'upload-item';
+            if (file.file_type?.startsWith('image/')) {
+                item.innerHTML = `<img src="${file.file_url}" alt="شاهد">`;
+                item.addEventListener('click', () => showImagePreview(file.file_url));
+            } else {
+                item.innerHTML = `<div class="upload-file-icon"><i class="fas fa-file-pdf"></i></div>`;
+                item.addEventListener('click', () => showPdfPreview(file.file_url, file.file_name));
+            }
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.style.cssText = 'position: absolute; top: 5px; right: 5px;';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.addEventListener('click', (e) => { e.stopPropagation(); deletePerformanceFile(performanceId, file.id, file.file_url); });
+            item.appendChild(deleteBtn);
+            return item;
+        }
 
         function addPerformanceEventListeners() {
-            document.querySelectorAll('.rating-slider').forEach(slider => {
-                slider.addEventListener('input', (e) => handleRatingChange(e.target));
+            document.querySelectorAll('.note-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentNoteItemId = btn.dataset.id;
+                    const data = performanceData.find(item => item.indicator_id === currentNoteItemId);
+                    document.getElementById('noteText').value = data?.note || '';
+                    document.getElementById('noteModal').style.display = 'block';
+                });
             });
-            document.querySelectorAll('.rating-number').forEach(num => {
-                num.addEventListener('click', (e) => {
-                    const slider = e.currentTarget.closest('.rating-container').querySelector('.rating-slider');
-                    slider.value = e.currentTarget.dataset.value;
-                    handleRatingChange(slider);
+
+            document.querySelectorAll('.rating-slider, .rating-number').forEach(el => {
+                const event = el.matches('.rating-slider') ? 'input' : 'click';
+                el.addEventListener(event, (e) => {
+                    const container = e.currentTarget.closest('.rating-container');
+                    const slider = container.querySelector('.rating-slider');
+                    const value = parseInt(el.matches('.rating-number') ? el.dataset.value : el.value);
+                    const id = slider.dataset.id;
+                    slider.value = value;
+                    container.querySelector('.rating-value').textContent = value;
+                    container.querySelectorAll('.rating-number').forEach(n => n.classList.toggle('active', parseInt(n.dataset.value) === value));
+                    updatePerformanceRating(id, value);
+                });
+            });
+
+            document.querySelectorAll('.upload-add').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = 'image/*,application/pdf';
+                    input.style.display = 'none';
+                    input.addEventListener('change', (ev) => handlePerformanceFileUpload(ev.target.files[0], id));
+                    document.body.appendChild(input);
+                    input.click();
+                    input.remove();
+                });
+            });
+
+            document.querySelectorAll('.add-link-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    const input = document.querySelector(`.link-input[data-id="${id}"]`);
+                    const link = input.value.trim();
+                    await updatePerformanceLink(id, link);
+                    const indicator = performanceIndicators.find(ind => ind.id === id);
+                    updateLinkDisplay(id, link, indicator.title);
+                    alert('تم حفظ الرابط');
                 });
             });
         }
-
-        function handleRatingChange(slider) {
-            const id = slider.dataset.id;
-            const value = parseInt(slider.value);
-            const container = slider.closest('.rating-container');
-            
-            container.querySelector('.rating-value').textContent = value;
-            container.querySelectorAll('.rating-number').forEach(n => {
-                n.classList.toggle('active', parseInt(n.dataset.value) === value);
-            });
-            
-            updatePerformanceRating(id, value);
-        }
-
-        function updatePerformanceRating(id, rating) {
-            let item = performanceData.find(p => p.id === id);
-            if (!item) {
-                item = { id: id, rating: 0 };
-                performanceData.push(item);
+        
+        async function handlePerformanceFileUpload(file, performanceId) {
+            if (!file) return;
+            const url = await uploadFile(file, `performance/${performanceId}`);
+            if (url) {
+                const fileData = { indicator_id: performanceId, file_url: url, file_name: file.name, file_type: file.type };
+                const { data, error } = await supabaseClient.from('performance_files').insert(fileData).select();
+                if (error) { alert('خطأ في حفظ ملف الشاهد'); console.error(error); } 
+                else { 
+                    const perfItem = performanceData.find(p => p.indicator_id === performanceId);
+                    if (perfItem) perfItem.files.push(data[0]);
+                    else { // if it's the first file for an item not yet in the array
+                        const newPerfItem = { indicator_id: performanceId, rating: 0, note: '', link_url: '', files: [data[0]] };
+                        performanceData.push(newPerfItem);
+                    }
+                    renderPerformanceItems();
+                }
             }
-            item.rating = rating;
-            localStorage.setItem('performanceData', JSON.stringify(performanceData));
-            calculateTotalScore();
         }
         
-        // ==========================================================
-        // ==============  دالة حساب التقييم (تم تعديلها) =============
-        // ==========================================================
-        function calculateTotalScore() {
-            let totalWeightedRating = 0;
-            const totalWeight = performanceIndicators.reduce((sum, indicator) => sum + indicator.weight, 0);
-            let detailsHTML = '';
-            
-            let hasRatedSomething = performanceData.some(item => item.rating > 0);
-
-            performanceIndicators.forEach(indicator => {
-                const data = performanceData.find(item => item.id === indicator.id);
-                const rating = data ? data.rating : 0;
-                totalWeightedRating += rating * indicator.weight;
-                detailsHTML += `<p>${indicator.title}: <span>${rating} من 5</span></p>`;
-            });
-
-            const finalScore = totalWeight > 0 ? (totalWeightedRating / totalWeight) : 0;
-
-            const scoreElement = document.getElementById('totalScore');
-            const ratingElement = document.getElementById('ratingText');
-            
-            scoreElement.textContent = finalScore.toFixed(1);
-            document.getElementById('scoreDetails').innerHTML = detailsHTML;
-
-            let color, ratingText;
-            if (!hasRatedSomething && finalScore === 0) {
-                color = '#7f8c8d';
-                ratingText = '-';
-            } else if (finalScore < 3) {      // يعادل أقل من 60%
-                color = '#e74c3c'; // Red
-                ratingText = 'غير مرضي';
-            } else if (finalScore < 3.5) { // 60% to 69.9%
-                color = '#f39c12'; // Orange
-                ratingText = 'مرضي';
-            } else if (finalScore < 4) { // 70% to 79.9%
-                color = '#f1c40f'; // Yellow
-                ratingText = 'جيد';
-            } else if (finalScore < 4.5) { // 80% to 89.9%
-                color = '#2ecc71'; // Light Green
-                ratingText = 'جيد جدًا';
-            } else {   // 90% and above
-                color = '#27ae60'; // Green
-                ratingText = 'ممتاز';
+        async function updatePerformanceRating(id, rating) {
+            const { error } = await supabaseClient.from('performance_data').upsert({ profile_id: PROFILE_ID, indicator_id: id, rating: rating }, { onConflict: 'indicator_id' });
+            if (error) console.error("Error updating rating:", error);
+            else {
+                let item = performanceData.find(d => d.indicator_id === id);
+                if(item) item.rating = rating; else performanceData.push({ indicator_id: id, rating, files:[] });
+                calculateTotalScore();
             }
-
-            scoreElement.style.color = color;
-            ratingElement.style.color = color;
-            ratingElement.textContent = ratingText;
         }
 
+        async function updatePerformanceNote(id, note) {
+            const { error } = await supabaseClient.from('performance_data').upsert({ profile_id: PROFILE_ID, indicator_id: id, note: note }, { onConflict: 'indicator_id' });
+            if (error) console.error("Error updating note:", error);
+            else {
+                 let item = performanceData.find(d => d.indicator_id === id);
+                if(item) item.note = note; else performanceData.push({ indicator_id: id, note, files:[] });
+            }
+        }
+
+        async function updatePerformanceLink(id, link) {
+            const { error } = await supabaseClient.from('performance_data').upsert({ profile_id: PROFILE_ID, indicator_id: id, link_url: link }, { onConflict: 'indicator_id' });
+            if (error) console.error("Error updating link:", error);
+        }
+
+        async function deletePerformanceFile(id, fileId, fileUrl) {
+            if (!confirm('هل أنت متأكد من حذف هذا الملف؟')) return;
+            await deleteFileByUrl(fileUrl);
+            const { error } = await supabaseClient.from('performance_files').delete().eq('id', fileId);
+            if(error) { alert('خطأ في حذف الملف'); console.error(error); } 
+            else { 
+                const perfItem = performanceData.find(p => p.indicator_id === id);
+                if (perfItem) perfItem.files = perfItem.files.filter(f => f.id !== fileId);
+                renderPerformanceItems();
+            }
+        }
+        
+        function calculateTotalScore() {
+            let totalRating = 0;
+            let detailsHTML = '';
+            performanceIndicators.forEach(indicator => {
+                const data = performanceData.find(item => item.indicator_id === indicator.id);
+                const rating = data?.rating || 0;
+                totalRating += rating;
+                detailsHTML += `<p>${indicator.title}: <span>${rating} من 5</span></p>`;
+            });
+            const finalScore = performanceIndicators.length > 0 ? (totalRating / performanceIndicators.length) : 0;
+            const scoreEl = document.getElementById('totalScore'), ratingEl = document.getElementById('ratingText');
+            scoreEl.textContent = `${finalScore.toFixed(2)}`;
+            document.getElementById('scoreDetails').innerHTML = detailsHTML;
+            let color, ratingText;
+            if (finalScore === 0) { color = '#7f8c8d'; ratingText = '-'; } 
+            else if (finalScore < 2) { color = '#e74c3c'; ratingText = 'غير مرضي'; } 
+            else if (finalScore < 3) { color = '#f39c12'; ratingText = 'مرضي'; } 
+            else if (finalScore < 4) { color = '#f1c40f'; ratingText = 'جيد'; } 
+            else if (finalScore < 4.5) { color = '#2ecc71'; ratingText = 'جيد جدًا'; } 
+            else { color = '#27ae60'; ratingText = 'ممتاز'; }
+            scoreEl.style.color = ratingEl.style.color = color;
+            ratingEl.textContent = ratingText;
+        }
+
+        async function deleteImprovement(id) {
+             if (!confirm('هل أنت متأكد من حذف خطة التحسين؟')) return;
+            const { error } = await supabaseClient.from('improvements').delete().eq('id', id);
+            if (error) { alert('خطأ في حذف الخطة'); console.error(error); } 
+            else { 
+                improvements = improvements.filter(i => i.id !== id);
+                renderImprovementPlans();
+            }
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            try {
+                const options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+                return new Date(dateString).toLocaleDateString('ar-SA', options);
+            } catch (e) {
+                return dateString;
+            }
+        }
+        
+        async function loadUserData() {
+            const { data, error } = await supabaseClient.from('profiles').select('*').eq('id', PROFILE_ID).single();
+            if (error && error.code !== 'PGRST116') return console.error("Error loading user data:", error); 
+            if (!data) return;
+
+            updateHeaderInfo(data);
+            document.getElementById('teacherNameInput').value = data.teacher_name || '';
+            document.getElementById('educationDeptInput').value = data.education_dept || '';
+            document.getElementById('schoolNameInput').value = data.school_name || '';
+            document.getElementById('academicYearInput').value = data.academic_year || '';
+            document.getElementById('fullNameInput').value = data.full_name || '';
+            document.getElementById('specialtyInput').value = data.specialty || '';
+            document.getElementById('qualificationInput').value = data.qualification || '';
+            document.getElementById('yearsOfExperienceInput').value = data.years_of_experience || '';
+            
+            if (data.license_image_url) {
+                renderLicenseImage(data.license_image_url);
+            }
+        }
+
+        function renderLicenseImage(imageUrl) {
+            const container = document.getElementById('licensePreview');
+            container.innerHTML = `<img src="${imageUrl}" alt="الرخصة المهنية"><button class="delete-btn" style="position: absolute; top: 5px; right: 5px;">×</button>`;
+            container.querySelector('img').addEventListener('click', () => showImagePreview(imageUrl));
+            container.querySelector('.delete-btn').addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                deleteLicenseImage(imageUrl);
+            });
+        }
+        
+        async function deleteLicenseImage(imageUrl) {
+            if (!confirm('هل أنت متأكد من حذف صورة الرخصة؟')) return;
+            await deleteFileByUrl(imageUrl);
+            const { error } = await supabaseClient.from('profiles').update({ license_image_url: null }).eq('id', PROFILE_ID);
+            if(error) { alert('خطأ في حذف الصورة'); console.error(error); }
+            else { document.getElementById('licensePreview').innerHTML = '<div class="certificate-placeholder">+</div>'; }
+        }
+
+        async function loadCertificates() {
+            const { data, error } = await supabaseClient.from('certificates').select('*').eq('profile_id', PROFILE_ID);
+            if (error) return console.error("Error loading certificates:", error);
+            certificates = data;
+            renderCertificates();
+        }
+        
+        async function loadCourses() {
+            const { data, error } = await supabaseClient.from('courses').select('*').eq('profile_id', PROFILE_ID);
+            if (error) return console.error("Error loading courses:", error);
+            courses = data;
+            renderCourses();
+        }
+        
+        async function loadPerformanceData() {
+            const { data, error } = await supabaseClient.from('performance_data').select('*').eq('profile_id', PROFILE_ID);
+            if (error) return console.error("Error loading performance data:", error);
+            const { data: files, error: filesError } = await supabaseClient.from('performance_files').select('*');
+            if(filesError) return console.error("Error loading performance files:", filesError);
+
+            performanceData = data.map(item => ({ ...item, files: files.filter(f => f.indicator_id === item.indicator_id) }));
+            renderPerformanceItems();
+        }
+
+        function renderFollowups() {
+            const list = document.getElementById('followupsList');
+            list.innerHTML = followups.length === 0 ? '<p style="text-align: center; color: #777;">لا توجد متابعات</p>' : '';
+            [...followups].sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(f => {
+                const item = document.createElement('div');
+                item.className = 'followup-item';
+                item.innerHTML = `<h4>المتابعة ${f.number}<button class="delete-btn" data-id="${f.id}">حذف</button></h4><div class="followup-info"><p><strong>التاريخ:</strong> <span>${formatDate(f.date)}</span></p><p><strong>اسم المتابع:</strong> <span>${f.name}</span></p></div>${f.notes ? `<div class="followup-notes"><strong>الملاحظات:</strong><br>${f.notes.replace(/\n/g, '<br>')}</div>` : ''}`;
+                list.appendChild(item);
+            });
+            list.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => deleteFollowup(parseInt(btn.dataset.id))));
+        }
+        
+        async function deleteFollowup(id) {
+            if (!confirm('هل أنت متأكد من حذف هذه المتابعة؟')) return;
+            const { error } = await supabaseClient.from('followups').delete().eq('id', id);
+            if (error) { alert('خطأ في حذف المتابعة'); console.error(error); } 
+            else { 
+                followups = followups.filter(f => f.id !== id);
+                renderFollowups(); 
+            }
+        }
+
+        async function loadFollowups() {
+            const { data, error } = await supabaseClient.from('followups').select('*').eq('profile_id', PROFILE_ID);
+            if(error) return console.error("Error loading followups:", error);
+            followups = data;
+            renderFollowups();
+        }
+
+        function renderImprovementPlans() {
+            const list = document.getElementById('improvementList');
+            list.innerHTML = '';
+            improvements.forEach(imp => {
+                const priorityClass = imp.priority === 'عالية' ? 'priority-high' : imp.priority === 'متوسطة' ? 'priority-medium' : 'priority-low';
+                const item = document.createElement('div');
+                item.className = 'improvement-item';
+                item.innerHTML = `<h4>${imp.area}</h4><p><strong>الأولوية:</strong> <span class="${priorityClass}">${imp.priority}</span></p><p><strong>الهدف:</strong> ${imp.goal}</p><p><strong>الإجراءات:</strong> ${imp.actions.replace(/\n/g, '<br>')}</p><p><strong>الفترة:</strong> ${formatDate(imp.start_date)} إلى ${formatDate(imp.end_date)}</p><button class="delete-btn" data-id="${imp.id}">حذف</button>`;
+                list.appendChild(item);
+            });
+            list.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => deleteImprovement(parseInt(btn.dataset.id))));
+        }
+        
+        async function loadDocumentationData() {
+            const { data, error } = await supabaseClient.from('profiles').select('recommendations').eq('id', PROFILE_ID).single();
+            if (error && error.code !== 'PGRST116') return console.error("Error loading recommendations:", error);
+            if (data?.recommendations) document.getElementById('recommendations').value = data.recommendations;
+        }
+        
+        async function loadImprovementPlans() {
+            const { data, error } = await supabaseClient.from('improvements').select('*').eq('profile_id', PROFILE_ID);
+            if (error) return console.error("Error loading improvements:", error);
+            improvements = data;
+            renderImprovementPlans();
+        }
+        
+        function updateLinkDisplay(id, link, title) {
+            const display = document.querySelector(`#links_${id}`);
+            display.innerHTML = '';
+            if (link?.trim()) {
+                const div = document.createElement('div');
+                div.className = 'saved-link';
+                div.style.cssText = 'margin-top: 10px; padding: 15px; background-color: #f0f8ff; border-radius: 8px; border-left: 4px solid #2196F3; position: relative;';
+                const delBtn = document.createElement('button');
+                delBtn.innerHTML = '×';
+                delBtn.style.cssText = 'position: absolute; top: 5px; left: 5px; background-color: #ff5252; color: white; border: none; width: 20px; height: 20px; border-radius: 50%; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;';
+                delBtn.title = 'حذف الرابط';
+                delBtn.addEventListener('click', async () => {
+                    if (confirm('هل أنت متأكد من حذف هذا الرابط؟')) { 
+                        await updatePerformanceLink(id, ''); 
+                        display.innerHTML = ''; 
+                        const input = document.querySelector(`.link-input[data-id="${id}"]`);
+                        if(input) input.value = '';
+                    }
+                });
+                div.innerHTML = `<p style="margin: 0; line-height: 1.6; padding-left: 25px;"><strong>شواهد مؤشر ${title}:</strong><br>يمكن الاطلاع على الشواهد عبر <a href="${link}" target="_blank" style="color: #2196F3; font-weight: bold;">هذا الرابط</a>.</p>`;
+                div.appendChild(delBtn);
+                display.appendChild(div);
+            }
+        }
+        
+        function showImagePreview(url) { document.getElementById('previewImage').src = url; document.getElementById('imagePreviewModal').style.display = 'block'; }
+        function showPdfPreview(url, name) { document.getElementById('pdfFileName').textContent = name || 'ملف PDF'; document.getElementById('pdfViewer').src = url; document.getElementById('pdfPreviewModal').style.display = 'block'; }
+        function downloadFile(url, name) { const a = document.createElement('a'); a.href = url; a.download = name || 'file'; document.body.appendChild(a); a.click(); a.remove(); }
     </script>
 </body>
 </html>

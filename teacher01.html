@@ -6,7 +6,7 @@
     <title>ملف شواهد الأداء الوظيفي للمعلم</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- هنا تم وضع الـ CSS كاملاً لتسهيل النسخ -->
+    <!-- تم دمج الـ CSS هنا لتسهيل النسخ -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
         body { background-color: #f5f5f5; color: #333; padding-right: 70px; }
@@ -120,16 +120,9 @@
             </div>
             
             <!-- Introduction Tab -->
-            <div class="tab-content" id="intro-content">
-                <h2>مقدمة الملف...</h2>
-                <!-- محتوى المقدمة هنا -->
-            </div>
-
+            <div class="tab-content" id="intro-content"><h2>مقدمة الملف...</h2></div>
             <!-- Leaders Tab -->
-            <div class="tab-content" id="leaders-content">
-                 <h2>كلمات القادة...</h2>
-                 <!-- محتوى كلمات القادة هنا -->
-            </div>
+            <div class="tab-content" id="leaders-content"><h2>كلمات القادة...</h2></div>
 
             <!-- CV Tab: السيرة الذاتية -->
             <div class="tab-content" id="cv-content">
@@ -196,10 +189,11 @@
         // ======================= إعدادات SUPABASE ========================
         // =================================================================
         
-        const SUPABASE_URL = 'ضع رابط المشروع (URL) هنا'; // هام: استبدل هذا
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5iYnFqenBnZWZ1aHlrY21hc2h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MzQ4NTEsImV4cCI6MjA3NzUxMDg1MX0.Oql2Hx4rX2c9qJ-KX9g1COOVwdfmJbcCunUCiTd82ZQ'; // هذا هو مفتاحك
+        const SUPABASE_URL = 'https://nbbqjzpefuhykcmashy.supabase.co'; // هام: استبدل هذا برابط مشروعك
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5iYnFqenBnZWZ1aHlrY21hc2h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MzQ4NTEsImV4cCI6MjA3NzUxMDg1MX0.Oql2Hx4rX2c9qJ-KX9g1COOVwdfmJbcCunUCiTd82ZQ';
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        //  ====  هذا هو السطر الذي تم إصلاحه  ====
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // =================================================================
         // =================== معرّف المعلم (للتجربة) ====================
@@ -248,7 +242,7 @@
                 return;
             }
             
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('teachers')
                 .select(`
                     *,
@@ -260,7 +254,11 @@
                 .single();
 
             if (error) {
-                console.error("خطأ في جلب البيانات:", error);
+                console.error("خطأ في جلب البيانات:", error.message);
+                // إذا لم يتم العثور على المعلم، قد نقوم بإنشائه
+                if (error.code === 'PGRST116') {
+                    console.log("المعلم غير موجود، سيتم محاولة إنشائه عند أول عملية حفظ.");
+                }
                 return;
             }
             
@@ -283,9 +281,6 @@
 
                 // عرض الشهادات
                 renderCertificates(data.certificates);
-                
-                // عرض الدورات (يمكنك إضافتها لاحقًا)
-                // renderCourses(data.courses);
             }
         }
 
@@ -293,13 +288,14 @@
 
         async function saveBasicData() {
             const updates = {
+                id: TEACHER_ID, // Upsert needs the primary key
                 full_name: document.getElementById('teacherNameInput').value,
                 education_dept: document.getElementById('educationDeptInput').value,
                 school_name: document.getElementById('schoolNameInput').value,
                 academic_year: document.getElementById('academicYearInput').value,
             };
             
-            const { error } = await supabase.from('teachers').update(updates).eq('id', TEACHER_ID);
+            const { error } = await supabaseClient.from('teachers').upsert(updates);
             if (error) {
                 console.error('خطأ في حفظ البيانات الأساسية:', error);
                 alert('فشل حفظ البيانات');
@@ -311,13 +307,14 @@
         
         async function saveCvData() {
             const updates = {
+                id: TEACHER_ID,
                 full_name: document.getElementById('fullNameInput').value,
                 specialty: document.getElementById('specialtyInput').value,
                 qualification: document.getElementById('qualificationInput').value,
                 years_of_experience: document.getElementById('yearsOfExperienceInput').value,
             };
 
-            const { error } = await supabase.from('teachers').update(updates).eq('id', TEACHER_ID);
+            const { error } = await supabaseClient.from('teachers').upsert(updates);
             if (error) {
                 console.error('خطأ في حفظ بيانات السيرة الذاتية:', error);
                  alert('فشل حفظ البيانات');
@@ -330,7 +327,7 @@
         // ---------- دوال رفع وعرض الملفات ----------
 
         async function uploadFile(file, bucket, path) {
-            const { data, error } = await supabase.storage
+            const { data, error } = await supabaseClient.storage
                 .from(bucket)
                 .upload(path, file, {
                     cacheControl: '3600',
@@ -342,8 +339,7 @@
                 return null;
             }
             
-            // جلب الرابط العام للملف
-            const { data: { publicUrl } } = supabase.storage.from(bucket).getPublicUrl(path);
+            const { data: { publicUrl } } = supabaseClient.storage.from(bucket).getPublicUrl(path);
             return publicUrl;
         }
 
@@ -353,7 +349,7 @@
             const publicUrl = await uploadFile(file, 'teacher_files', filePath);
 
             if (publicUrl) {
-                const { error } = await supabase.from('teachers').update({ license_image_url: publicUrl }).eq('id', TEACHER_ID);
+                const { error } = await supabaseClient.from('teachers').update({ license_image_url: publicUrl }).eq('id', TEACHER_ID);
                 if (error) console.error("فشل تحديث رابط الرخصة:", error);
                 else renderLicenseImage(publicUrl);
             }
@@ -365,7 +361,7 @@
             const publicUrl = await uploadFile(file, 'teacher_files', filePath);
 
             if (publicUrl) {
-                const { data, error } = await supabase.from('certificates').insert({ teacher_id: TEACHER_ID, image_url: publicUrl }).select();
+                const { data, error } = await supabaseClient.from('certificates').insert({ teacher_id: TEACHER_ID, image_url: publicUrl }).select();
                 if (error) console.error("فشل حفظ الشهادة:", error);
                 else addCertificateToDOM(data[0]);
             }
@@ -373,13 +369,17 @@
 
         async function deleteCertificate(certId, element) {
             if (!confirm("هل أنت متأكد من حذف هذه الشهادة؟")) return;
-            const { error } = await supabase.from('certificates').delete().eq('id', certId);
-            if (error) {
-                console.error("فشل الحذف:", error);
+            
+            // First, delete from database
+            const { error: dbError } = await supabaseClient.from('certificates').delete().eq('id', certId);
+            if (dbError) {
+                console.error("فشل الحذف من قاعدة البيانات:", dbError);
                 alert("فشل حذف الشهادة");
             } else {
+                // If successful, remove from UI
                 element.remove();
             }
+            // You might also want to delete the file from storage here to save space
         }
 
         // ---------- دوال تحديث الواجهة (DOM) ----------
